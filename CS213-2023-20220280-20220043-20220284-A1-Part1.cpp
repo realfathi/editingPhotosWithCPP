@@ -35,14 +35,15 @@ void flip();
 void darken();
 void lighten();
 void mirror();
+void enlarge();
 
 //_________________________________________
 
 char menu(){
     char choice ;
     choice = '.' ;
-    // this loop check your choice is exist or not
-    // if not chooce again
+    // this loop checks if your choice exists or not
+    // if not choose again
     while (choice == '.'){
         cout << "Filter 1: Black and White Image\nFilter 2: Invert Image\n";
         cout << "Filter 3: Merge Images\nFilter 4: Flip Image\n";
@@ -119,7 +120,7 @@ void invert() {
 void rotate_90(){
     /*
     rotating the image 90 degrees clockwise by switching
-    the rows with the columns and reversing the columns orde
+    the rows with the columns and reversing the columns order
     */
     unsigned char tmp [SIZE][SIZE];
     for (int i = 0; i < SIZE; i++) {
@@ -157,7 +158,7 @@ void black_white(){
                 image[i][j] = 0 ;
         }
     }
-    /*decide if pexel is light or dark then make it black and white*/
+    /*decide if pixel is light or dark then make it black and white*/
 }
 
 //_____________________________________________
@@ -165,8 +166,8 @@ void black_white(){
 void flip(){
 
     int n4 = -1 ;
-    // this loop check your choice is exist or not
-    // if not chooce again
+    // this loop checks if your choice exists or not
+    // if not choose again
     while (n4 == -1 ){
         cout<<"1:vertically\n2:horizontally\n";
         cout<<"Enter a number to select horizontally or vertically: ";
@@ -224,19 +225,19 @@ void lighten(){
 
 //_____________________________________________
 
-void megre(){
+void merge(){
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
             image[i][j] = (image[i][j] + image2[i][j]) / 2;
-    // divid by 2 to make pixel between 0 & 255
+    // divide by 2 to make pixel between 0 & 255
 }
 
 //_____________________________________________
 
 void rotate_image(){
     int n5 = -1 ;
-    // this loop check your choice is exist or not
-    // if not chooce again
+    // this loop checks if your choice exists or not
+    // if not choose again
     while (n5 == -1 ){
         cout << "1: 90º\n2: 180º\n3: 270º\n";
         cout << "Enter a number to select the angel:\n";
@@ -258,8 +259,8 @@ void rotate_image(){
 
 void darken_lighten(){
     int n6 = -1 ;
-    // this loop check your choice is exist or not
-    // if not chooce again
+    // this loop checks if your choice exists or not
+    // if not choose again
     while (n6 == -1 ){
         cout << "1: Darken Image \n2: Lighten Image \n";
         cout << "Enter a number to select Darken or Lighten Image: ";
@@ -278,6 +279,21 @@ void darken_lighten(){
             n6 = -1 ; // loop keep working
         }
     }
+}
+//_____________________________________________
+void enlarge(){
+        int x=0;
+        for (int i = SIZE/2; i < SIZE; i++) {
+            int y=0;
+            for (int j = SIZE/2; j<SIZE; j++){
+                image2[x][y]=image[i][j];
+                image2[x+1][y]=image[i][j];
+                image2[x][y+1]=image[i][j];
+                image2[x+1][y+1]=image[i][j];
+                y+=2;
+            }
+            x+=2;
+        }
 }
 //_____________________________________________
 void mirror(){
@@ -340,7 +356,7 @@ void doSomethingForImage() {
                 // This to add second image it .bmp extension and
                 //load image to merge with first image
                 load_to_merge();
-                megre();
+                merge();
                 break;
 
             case '4':
