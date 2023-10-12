@@ -36,6 +36,7 @@ void darken();
 void lighten();
 void mirror();
 void enlarge();
+void detect_edge();
 
 //_________________________________________
 
@@ -333,7 +334,18 @@ void mirror(){
 
 }
 //_____________________________________________
+void detect_edge(){
+for (int i = 0; i < SIZE; i++) {
+for (int j = 0; j < SIZE; j++) {
+    if ((abs(image[i][j]) - abs(image[i][j + 1])) >= 32 || (abs(image[i][j]) - abs(image[i + 1][j])) >= 30)
+        image[i][j] = 0;
+    else
+        image[i][j] = 255;
 
+}
+}
+}
+//_____________________________________________
 void doSomethingForImage() {
 
     char num;
@@ -374,7 +386,8 @@ void doSomethingForImage() {
                 darken_lighten(); // to make the image darken or lighten
                 break;
             case '7':
-// code block
+            loadImage();
+            detect_edge();
                 break;
             case '8':
 // code block
