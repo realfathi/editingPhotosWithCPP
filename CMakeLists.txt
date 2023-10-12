@@ -3,4 +3,4 @@ project(OOP_ASS1)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(OOP_ASS1 main.cpp bmplib.cpp bmplib.h)
+add_executable(OOP_ASS1 main.cpp bmplib.cpp bmplib.h CS213-2023-20220280-20220043-20220284-A1-Part1.cpp CS213-2023-20220280-20220043-20220284-A1-Part1.cpp CS213-2023-20220280-20220043-20220284-A1-Part1.cpp)
