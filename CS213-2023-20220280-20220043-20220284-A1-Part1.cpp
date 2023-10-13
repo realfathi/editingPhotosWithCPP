@@ -23,7 +23,7 @@ using namespace std;
 unsigned char image[SIZE][SIZE];
 unsigned char image2[SIZE][SIZE];
 
-string select ; // Global variable
+char select ; // Global variable
 
 void loadImage ();
 void saveImage ();
@@ -42,21 +42,26 @@ void detect_edge();
 
 //_________________________________________
 
-string menu(){
-    string choice ;
-    choice = "." ;
+char menu(){
+    char choice ;
+    choice = '.' ;
     // this loop checks if your choice exists or not
     // if not choose again
-    while (choice == "."){
+    while (choice == '.'){
         cout << "Filter 1: Black and White Image\nFilter 2: Invert Image\n";
         cout << "Filter 3: Merge Images\nFilter 4: Flip Image\n";
         cout << "Filter 5: Rotate Image\nFilter 6: Darken and Lighten Image\n";
+        cout << "Filter 7: Detect Image Edges\nFilter 8: Enlarge Image\n";
+        cout << "Filter 9: Shrink Image\nFilter a: Mirror Image\n";
+        cout << "Filter b: Shuffle Image\nFilter c: Blur Image\n";
+        cout << "Filter d: Crop Image\nFilter e: Skew Horizontally Image\n";
+        cout << "Filter f: Skew Vertically Image\n";
         cout << "s: Save the image to a file \n";
         cout << "0: Exit\n";
         cin >> choice ;
-        if (!(choice >= "0" && choice <= "6" || choice =="s")){
+        if (!(choice >= '0' && choice <= '9' || choice >= 'a' && choice <= 'f' || choice == 's')){
             cout << "==============\nWrong Number, Please TRY Again !\n\n";
-            choice = "." ; // loop keep working
+            choice = '.' ; // loop keep working
         }
     }
 
@@ -252,7 +257,7 @@ void rotate_image(){
         else if (n5 == 3)
             rotate_270();
         else {
-            cout << "========\n\nWrong Number, Please TRY Again  *_*\n\n";
+            cout << "\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
             n5 = -1 ; // loop keep working
         }
     }
@@ -278,7 +283,7 @@ void darken_lighten(){
             return ;
         }
         else{
-            cout << "========\n\nWrong Number, Please TRY Again  *_*\n\n";
+            cout << "\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
             n6 = -1 ; // loop keep working
         }
     }
@@ -289,8 +294,15 @@ void darken_lighten(){
 void shrink_image(){
     for(int i = 0 ; i < SIZE ; i++)
         for(int j = 0 ; j < SIZE ; j++){
+            image2[i][j] = image[i][j] ;
             image[i][j] = 255 ;
         }
+
+    for(int i = 0 ; i < SIZE /2 ; i++)
+        for(int j = 0 ; j < SIZE /2 ; j++){
+            image[i][j] = image2[i][j] ;
+        }
+    
 }
 
 //_____________________________________________
@@ -342,7 +354,7 @@ void mirror(){
         }
     }
     else 
-        cout<<"========\n\nWrong Number, Please TRY Again  *_*\n\n";
+        cout<<"\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
 
 
 }
@@ -361,79 +373,99 @@ void detect_edge(){
 //_____________________________________________
 void doSomethingForImage() {
 
+    char num;
+    bool loaded = false ;
     while (true) {
-        string num = menu() ; // return what we choice from menu
-        select = num ;
-        if (select == "1"){
-            loadImage();
-            black_white();
+        num = menu() ; // return what we choice from menu
+        select = num ; 
+        switch (select) {
+            case '1':
+                if (loaded == false)
+                    loadImage();
+                black_white();
+                loaded = true ; 
+                break;
+
+            case '2':
+                if (loaded == false)
+                    loadImage();
+                invert();
+                loaded = true ;
+                break;
+
+            case '3':
+                if (loaded == false)
+                    loadImage();
+                // This to add second image it .bmp extension and
+                //load image to merge with first image
+                load_to_merge();
+                merge();
+                loaded = true ;
+                break;
+
+            case '4':
+                if (loaded == false)
+                    loadImage();
+                flip();
+                loaded = true ;
+                break;
+
+            case '5':
+                if (loaded == false)
+                    loadImage();
+                rotate_image();
+                loaded = true ;
+                break;
+
+            case '6':
+                if (loaded == false)
+                    loadImage();
+                darken_lighten(); // to make the image darken or lighten
+                loaded = true ;
+                break;
+            case '7':
+                if (loaded == false)
+                    loadImage();
+                detect_edge();
+                loaded = true ;
+                break;
+            case '8':
+// code block
+                break;
+            case '9':
+                if (loaded == false)
+                    loadImage ();
+                shrink_image(); 
+                loaded = true ;        
+                break;
+            case 'a':
+                if (loaded == false)
+                    loadImage();
+                mirror();
+                loaded = true ;
+                break;
+            case 'b':
+// code block
+                break;
+            case 'c':
+// code block
+                break;
+            case 'd':
+// code block
+                break;
+            case 'e':
+// code block
+                break;
+            case 'f':
+// code block
+                break;
+            case 's':
+                saveImage ();
+                return ;
+                break;
         }
-        else if (select == "2"){
-            loadImage();
-            invert();
-        }
-        else if (select == "3"){
-            loadImage();
-            // This to add second image it .bmp extension and
-            //load image to merge with first image
-            load_to_merge();
-            merge();
-        }
-        else if (select == "4"){
-            loadImage();
-            flip();
-        }
-        else if (select == "5"){
-            loadImage();
-            rotate_image();
-        }
-        else if (select == "6"){
-            loadImage();
-            darken_lighten(); // to make the image darken or lighten
-        }
-        else if (select == "7"){
-            loadImage();
-            detect_edge();
-        }
-//         else if (select == "8"){
-// // code block
-//         }
-        else if (select == "9"){
-            shrink_image();
-        }
-        else if (select == "10"){
-            loadImage();
-            mirror();
-        }
-//         else if (select == "11"){
-// // code block
-//         }
-//         else if (select == "12"){
-// // code block
-//         }
-//         else if (select == "13"){
-// // code block
-//         }
-//         else if (select == "14"){
-// // code block
-//         }
-//         else if (select == "15"){
-// // code block
-//         }
-        else if (select == "s"){
-            saveImage ();
-        }
-        else    
-            return ;
-        
     }
-
 }
-
-
-
-
-
 
 //_____________________________________________
 
@@ -442,7 +474,7 @@ int main()
 {
     while (true ){
         doSomethingForImage();
-        if (select == "0")
+        if (select == '0') // check if you choice from menu 0 the program will end
             return 0;
     }
 }
