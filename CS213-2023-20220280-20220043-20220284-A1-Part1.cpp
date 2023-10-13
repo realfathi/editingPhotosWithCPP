@@ -1,7 +1,7 @@
 /*
                                             Assignment 1 - OOP
-                                                   Part 1
-Date: 6 October 2023
+                                                   Part 2
+Date: 13 October 2023
 Purpose: Demonstrate use of bmplip for handling  / load a gray image and store in another file
 Supervised by Dr.Mohammad El-Ramly
 
@@ -11,7 +11,7 @@ Ahmed Mostafa Muhammad -   20220043  - 05.ahmedmustafa@gmail.com
 Muhammad Gamal ALi     -   20220284  - mohamedgamal200420042004@gmail.com
 
 Version: 1.0 (Demo)
-6 Filters Only....
+15 Filters Black and White images....
 
 
 
