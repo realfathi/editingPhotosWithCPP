@@ -425,7 +425,7 @@ void shuffle(){
                 y=0;
                 if(k==1 or k==3)y=128;
                 for (int j =0; j<SIZE/2; j++){
-                    imag2[x][y] = image[i][j];
+                    image2[x][y] = image[i][j];
                     y++;
                 }
                 x++;
