@@ -360,6 +360,10 @@ void enlarge(){
             }
             x+=2;
         }
+      for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++)
+            image[i][j] = image2[i][j];
+    }
 }
 //_____________________________________________
 void mirror(){
@@ -408,6 +412,126 @@ void detect_edge(){
                 image[i][j] = 255;
 
         }
+    }
+}
+//_____________________________________________
+void shuffle(){
+    for(int k=0; k<4; ++k){
+        int o; cin>>o;
+        if(o==1){
+            int x=128, y;
+            if(k == 0 or k==1)x=0;
+            for (int i = 0; i < SIZE/2; i++){
+                y=0;
+                if(k==1 or k==3)y=128;
+                for (int j =0; j<SIZE/2; j++){
+                    imag2[x][y] = image[i][j];
+                    y++;
+                }
+                x++;
+            }
+        }
+        else if(o==2){
+            int x=128, y;
+            if(k == 0 or k==1)x=0;
+            for (int i = 0; i < SIZE/2; i++) {
+                y=0;
+                if(k==1 or k==3)y=128;
+                for (int j = SIZE/2; j<SIZE; j++){
+                    image2[x][y] = image[i][j];
+                    y++;
+                }
+                x++;
+            }
+        }
+        else if(o==3){
+            int x=128, y;
+            if(k == 0 or k==1)x=0;
+            for (int i = SIZE/2; i < SIZE; i++) {
+                y=0;
+                if(k==1 or k==3)y=128;
+                for (int j = 0; j<SIZE/2; j++){
+                    image2[x][y] = image[i][j];
+                    y++;
+                }
+                x++;
+            }
+        }
+        else if(o==4){
+            int x=128, y;
+            if(k == 0 or k==1)x=0;
+            for (int i = SIZE/2; i < SIZE; i++) {
+                y=0;
+                if(k==1 or k==3)y=128;
+                for (int j = SIZE/2; j<SIZE; j++){
+                    image2[x][y] = image[i][j];
+                    y++;
+                }
+                x++;
+            }
+        }
+    }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++)
+            image[i][j] = image2[i][j];
+    }
+}
+//_____________________________________________
+void shrink_h(float d){
+    float step = SIZE/d;
+    for(int i=0; i<SIZE; i++){
+        float y=0;
+        for(int j=0; j<d; j++){
+            y+=step;
+            image2[i][j]=image[i][int(y)];
+        }
+    }
+}
+void skew_h(){
+    int b;cin>>b;
+    double a = tan((M_PI/180)*b);
+    float x = floor(256/ (1 + 1/a));
+    shrink_h(x);
+    for(int i=0; i<SIZE; i++){
+        for(int j=0; j<SIZE; j++)image[i][j]=255;
+    }
+    double step = SIZE - x; double move = step/SIZE;
+    for(int i=0; i<SIZE; i++){
+        int ct = step + x, y=0;
+        for(int j=step; j<ct; ++j){
+            image[i][j]=image2[i][y];
+            y++;
+        }
+        step-=move;
+    }
+}
+//_____________________________________________
+void shrink_v(float d){
+    float step = SIZE/d;
+    float y=0;
+    for(int i=0; i<d; i++){
+        y+=step;
+        for(int j=0; j<SIZE; j++){
+            image2[i][j]=image[int(y)][j];
+        }
+    }
+}
+void skew_v(){
+    int b;cin>>b;
+    double a = tan((M_PI/180)*b);
+    float x = floor(256/ (1 + 1/a));
+    shrink_v(x);
+    for(int i=0; i<SIZE; i++){
+        for(int j=0; j<SIZE; j++)image[i][j]=255;
+    }
+    double step = SIZE - x; double move = step/SIZE;
+    for(int i=0; i<SIZE; i++){
+        int ct = step + x, y=0;
+        for(int j=step; j<ct; ++j){
+            image[j][i]=image2[y][i];
+            y++;
+        }
+        step-=move;
     }
 }
 //_____________________________________________
@@ -506,7 +630,10 @@ void doSomethingForImage() {
                 loaded = true ;
                 break;
             case 'b':
-// code block
+              if (loaded == false)
+                    loadImage();
+                shuffle();
+                loaded = true ;
                 break;
             case 'c':
 // code block
@@ -519,10 +646,16 @@ void doSomethingForImage() {
                 break;
 
             case 'e':
-// code block
+              if (loaded == false)
+                    loadImage();
+                skew_h();
+                loaded = true ;
                 break;
             case 'f':
-// code block
+                if (loaded == false)
+                    loadImage();
+                skew_v();
+                loaded = true ;
                 break;
             case 's':
                 saveImage ();
