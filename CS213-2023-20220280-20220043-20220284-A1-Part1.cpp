@@ -416,6 +416,7 @@ void detect_edge(){
 }
 //_____________________________________________
 void shuffle(){
+    cout<<"Enter your order:\n";
     for(int k=0; k<4; ++k){
         int o; cin>>o;
         if(o==1){
@@ -488,7 +489,9 @@ void shrink_h(float d){
     }
 }
 void skew_h(){
-    int b;cin>>b;
+    int b;
+    cout<<"Enter your angle: ";
+    cin>>b;
     double a = tan((M_PI/180)*b);
     float x = floor(256/ (1 + 1/a));
     shrink_h(x);
@@ -517,7 +520,9 @@ void shrink_v(float d){
     }
 }
 void skew_v(){
-    int b;cin>>b;
+    int b;
+    cout<<"Enter your angle: ";
+    cin>>b;
     double a = tan((M_PI/180)*b);
     float x = floor(256/ (1 + 1/a));
     shrink_v(x);
