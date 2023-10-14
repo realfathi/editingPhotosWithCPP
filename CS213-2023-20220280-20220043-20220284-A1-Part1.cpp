@@ -22,6 +22,7 @@ Version: 1.0 (Demo)
 using namespace std;
 unsigned char image[SIZE][SIZE];
 unsigned char image2[SIZE][SIZE];
+unsigned char croppedImage[SIZE][SIZE];
 
 char select ; // Global variable
 
@@ -39,7 +40,7 @@ void lighten();
 void mirror();
 void enlarge();
 void detect_edge();
-
+void crop();
 //_________________________________________
 
 char menu(){
@@ -371,6 +372,26 @@ void detect_edge(){
     }
 }
 //_____________________________________________
+void crop() {
+    int x, y, width, height;
+    cin >> x >> y >> width >> height;
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+            croppedImage[i][j] = image[x + i][y + j];
+        }
+    }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            image[i][j] = 255;
+        }
+    }
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+            image[i + x][y + j] = croppedImage[i][j];
+        }
+    }
+}
+//_____________________________________________
 void doSomethingForImage() {
 
     char num;
@@ -451,8 +472,12 @@ void doSomethingForImage() {
 // code block
                 break;
             case 'd':
-// code block
+                if (loaded == false)
+                    loadImage();
+                crop();
+                loaded = true ;
                 break;
+
             case 'e':
 // code block
                 break;
