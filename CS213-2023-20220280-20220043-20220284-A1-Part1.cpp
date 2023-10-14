@@ -347,24 +347,6 @@ void shrink_image(){
 
 //_____________________________________________
 
-void enlarge(){
-        int x=0;
-        for (int i = SIZE/2; i < SIZE; i++) {
-            int y=0;
-            for (int j = SIZE/2; j<SIZE; j++){
-                image2[x][y]=image[i][j];
-                image2[x+1][y]=image[i][j];
-                image2[x][y+1]=image[i][j];
-                image2[x+1][y+1]=image[i][j];
-                y+=2;
-            }
-            x+=2;
-        }
-      for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++)
-            image[i][j] = image2[i][j];
-    }
-}
 //_____________________________________________
 void mirror(){
     cout<<"1:Left 1/2\n2:Right 1/2\n3:Upper 1/2\n4:Lower 1/2.\n";
@@ -416,7 +398,7 @@ void detect_edge(){
 }
 //_____________________________________________
 void shuffle(){
-    cout<<"Enter your order:\n";
+    cout<<"Enter the order in numbers:\n";
     for(int k=0; k<4; ++k){
         int o; cin>>o;
         if(o==1){
@@ -471,6 +453,10 @@ void shuffle(){
                 x++;
             }
         }
+      else {
+        cout<<"Wrong number!\n";
+        k--;
+      }
     }
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++)
