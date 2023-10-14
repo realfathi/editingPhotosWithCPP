@@ -373,7 +373,7 @@ void detect_edge(){
 }
 //_____________________________________________
 void crop() {
-    cout<<"Enter x ,y ,width ,height";
+    cout<<"Enter x ,y ,width ,height:";
     int x, y, width, height;
     cin >> x >> y >> width >> height;
     for (int i = 0; i < width; i++) {
