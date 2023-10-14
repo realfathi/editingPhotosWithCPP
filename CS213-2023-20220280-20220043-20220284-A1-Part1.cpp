@@ -526,8 +526,9 @@ void doSomethingForImage() {
                 break;
             case 's':
                 saveImage ();
-                return ;
                 break;
+            default : // close the program if you choice zero 
+                return ;
         }
     }
 }
@@ -537,9 +538,6 @@ void doSomethingForImage() {
 
 int main()
 {
-    while (true ){
-        doSomethingForImage();
-        if (select == '0') // check if you choice from menu 0 the program will end
-            return 0;
-    }
+  doSomethingForImage();
+  return 0;
 }
