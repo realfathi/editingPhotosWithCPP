@@ -615,7 +615,10 @@ void doSomethingForImage() {
                 loaded = true ;
                 break;
             case '8':
-// code block
+                if (loaded == false)
+                    loadImage ();
+                enlarge(); 
+                loaded = true ;
                 break;
             case '9':
                 if (loaded == false)
