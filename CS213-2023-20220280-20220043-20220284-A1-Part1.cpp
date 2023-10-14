@@ -630,7 +630,10 @@ void doSomethingForImage() {
                 loaded = true ;
                 break;
             case 'c':
-// code block
+                if (loaded == false)
+                    loadImage ();
+                blur_image(); 
+                loaded = true ;
                 break;
             case 'd':
                 if (loaded == false)
