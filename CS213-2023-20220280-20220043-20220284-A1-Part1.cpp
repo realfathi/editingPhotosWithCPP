@@ -293,16 +293,55 @@ void darken_lighten(){
 //_____________________________________________
 
 void shrink_image(){
-    for(int i = 0 ; i < SIZE ; i++)
-        for(int j = 0 ; j < SIZE ; j++){
-            image2[i][j] = image[i][j] ;
-            image[i][j] = 255 ;
-        }
 
-    for(int i = 0 ; i < SIZE /2 ; i++)
-        for(int j = 0 ; j < SIZE /2 ; j++){
-            image[i][j] = image2[i][j] ;
+    int n9 = -1 ; 
+    while (n9 == -1){
+        cout << "shrink the image dimensions to: \n";
+        cout << "1: 1/2\n2: 1/3\n3: 1/4 \n";
+        cout << "Enter a number to select dimension of shrink the image: ";
+        cin >> n9 ;
+        // to make image background is wihte 
+        for(int i = 0 ; i < SIZE ; i++){
+            for(int j = 0 ; j < SIZE ; j++){
+                image2[i][j] = image[i][j] ;
+                image[i][j] = 255 ;
+            }
         }
+      
+        // first condition
+        if (n9 == 1 ){
+            for(int i = 0 ; i < SIZE /2; i++){
+                for(int j = 0 ; j < SIZE /2 ; j++){
+                    image[i][j] = image2[i*2][j*2] ;
+                }
+            }
+            return ;
+        }
+          
+        // second condition
+        else if (n9 == 2 ){
+            for(int i = 0 ; i < SIZE /3; i++){
+                for(int j = 0 ; j < SIZE /3 ; j++){
+                    image[i][j] = image2[i*3][j*3] ;
+                }
+            }
+            return ;
+        }
+          
+        // third condition
+        else if (n9 == 3 ){
+            for(int i = 0 ; i < SIZE /4; i++){
+                for(int j = 0 ; j < SIZE /4 ; j++){
+                    image[i][j] = image2[i*4][j*4] ;
+                }
+            }
+            return ;
+        }
+        else{
+            cout << "\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
+            n9 = -1 ; // loop keep working
+        }
+    }
     
 }
 
