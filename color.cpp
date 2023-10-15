@@ -265,7 +265,8 @@ void merge(){
 
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
-            image[i][j] = (image[i][j] + image2[i][j]) / 2;
+            for (int k = 0 ; k < RGB ; k++)
+                image[i][j][k] = ( image[i][j][k] + image2[i][j][k] ) / 2;
     // divide by 2 to make pixel between 0 & 255
 
 }
