@@ -157,19 +157,23 @@ void rotate_270(){
 
 //_____________________________________________
 
-void black_white(){
+void black_white() {
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-
-            if (image[i][j] > 127)
-                image[i][j] = 255 ;
-            else
-                image[i][j] = 0 ;
+            int average = (image[i][j][0] + image[i][j][1] + image[i][j][2]) / 3;
+            if (average > 127) {
+                image[i][j][0] = 255;   // Red channel
+                image[i][j][1] = 255;   // Green channel
+                image[i][j][2] = 255;   // Blue channel
+            } else {
+                image[i][j][0] = 0;     // Red channel
+                image[i][j][1] = 0;     // Green channel
+                image[i][j][2] = 0;     // Blue channel
+            }
         }
+        /*decide if pixel is light or dark then make it black and white*/
     }
-    /*decide if pixel is light or dark then make it black and white*/
 }
-
 //_____________________________________________
 
 void flip(){
@@ -182,23 +186,28 @@ void flip(){
         cout<<"Enter a number to select horizontally or vertically: ";
         cin>>n4;
 
-        if (n4==1){ // vertically
+        if (n4==1) { // vertically
             /*swapping the values between the top and bottom rows*/
-            for (int i = 0; i < SIZE/2; i++) {
+            for (int i = 0; i < SIZE / 2; i++) {
                 for (int j = 0; j < SIZE; j++) {
-                    int tmp = image[i][j];
-                    image[i][j]=image[SIZE-i][j];
-                    image[SIZE-i][j]=tmp;
+                    for (int k = 0; k <3; ++k) {
+
+                        int tmp = image[i][j][k];
+                        image[i][j][k] = image[SIZE - i][j][k];
+                        image[SIZE - i][j][k] = tmp;
+                    }
                 }
             }
         }
             /*swapping the values between the top and bottom column*/
-        else if (n4==2){ // horizontally
+        else if (n4==2) { // horizontally
             for (int i = 0; i < SIZE; i++) {
-                for (int j = 0; j < SIZE/2; j++) {
-                    int tmp = image[i][j];
-                    image[i][j]=image[i][SIZE-j];
-                    image[i][SIZE-j]=tmp;
+                for (int j = 0; j < SIZE / 2; j++) {
+                    for (int k = 0; k <3; ++k) {
+                        int tmp = image[i][j][k];
+                        image[i][j][k] = image[i][SIZE - j][k];
+                        image[i][SIZE - j][k] = tmp;
+                    }
                 }
             }
         }
@@ -208,6 +217,7 @@ void flip(){
         }
     }
 }
+
 
 //_____________________________________________
 
@@ -410,47 +420,61 @@ void mirror(){
     if (n10==1){
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                image[i][SIZE-j] = image[i][j];
+                for (int k = 0; k < 3; ++k) {
+                    image[i][SIZE-j][k] = image[i][j][k];
+                }
             }
         }
-    }
+    }//write the first col. to last col.
     else if (n10==2){
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                image[i][j] = image[i][SIZE-j];
+                for (int k = 0; k <3 ; ++k) {
+                    image[i][j][k] = image[i][SIZE-j][k];
+                }
             }
-        }}
+        }
+    }//write the last col. to first col.
     else if(n10==3){
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                image[SIZE -i][j] = image[i][j];
+                for (int k = 0; k < 3; ++k) {
+                    image[SIZE -i][j][k] = image[i][j][k];
+                }
             }
-        }
-    }
+        } }//write the upper(first) row to the last row
     else if(n10==4){
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                image[i][j] = image[SIZE-i][j];
+                for (int k = 0; k < 3; ++k) {
+                    image[i][j][k] = image[SIZE-i][j][k];
+                }
             }
         }
-    }
+    }//write the last row to the first row
     else
         cout<<"\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
 
 
 }
 //_____________________________________________
-void detect_edge(){
+void detect_edge() {
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            if ((abs(image[i][j]) - abs(image[i][j + 1])) >= 32 || (abs(image[i][j]) - abs(image[i + 1][j])) >= 30)
-                image[i][j] = 0;
-            else
-                image[i][j] = 255;
+            for (int k = 0; k < 3; ++k) {
 
+                if ((abs(image[i][j][k]) - abs(image[i][j + 1][k])) >= 32 || (abs(image[i][j][k]) - abs(image[i + 1][j][k])) >= 30)
+                    image[i][j][k] = 0;
+                else
+                    image[i][j][k] = 255;
+
+            }
         }
     }
-}
+}//see the average between every upper pixel or every side pexel if bigger
+// than 32 (as gradient(light and dark)) make it black and other white
+// I did it like the website dr.ramly gave us (edges are colored)
+
 //_____________________________________________
 void shuffle(){
     cout<<"Enter the order in numbers:\n";
@@ -582,24 +606,32 @@ void skew_v(){
 }
 //_____________________________________________
 void crop() {
-    cout<<"Enter x ,y ,width ,height:";
+    cout << "Enter x ,y ,width ,height:";
     int x, y, width, height;
     cin >> x >> y >> width >> height;
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
-            croppedImage[i][j] = image[x + i][y + j];
+            for (int k = 0; k < 3; ++k) {
+                croppedImage[i][j][k] = image[x + i][y + j][k];
+            }
         }
-    }
+    } //fill a temp. image the cropped photo
+
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            image[i][j] = 255;
+            for (int k = 0; k < 3; ++k) {
+                image[i][j][k] = 255;
+            }
         }
-    }
+    }//make original the image white
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
-            image[i + x][y + j] = croppedImage[i][j];
+            for (int k = 0; k < 3; ++k) {
+
+                image[i + x][y + j][k] = croppedImage[i][j][k];
+            }
         }
-    }
+    }//paste the temp. to our white image
 }
 //_____________________________________________
 void doSomethingForImage() {
@@ -613,7 +645,7 @@ void doSomethingForImage() {
             case '1':
                 if (loaded == false)
                     loadImage();
-                // black_white();
+                black_white();
                 loaded = true ;
                 break;
 
@@ -637,7 +669,7 @@ void doSomethingForImage() {
             case '4':
                 if (loaded == false)
                     loadImage();
-                // flip();
+                flip();
                 loaded = true ;
                 break;
 
@@ -657,7 +689,7 @@ void doSomethingForImage() {
             case '7':
                 if (loaded == false)
                     loadImage();
-                // detect_edge();
+                detect_edge();
                 loaded = true ;
                 break;
             case '8':
@@ -675,7 +707,7 @@ void doSomethingForImage() {
             case 'a':
                 if (loaded == false)
                     loadImage();
-                // mirror();
+                mirror();
                 loaded = true ;
                 break;
             case 'b':
@@ -693,7 +725,7 @@ void doSomethingForImage() {
             case 'd':
                 if (loaded == false)
                     loadImage();
-                // crop();
+                crop();
                 loaded = true ;
                 break;
 
