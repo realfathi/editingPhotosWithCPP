@@ -328,39 +328,43 @@ void darken_lighten(){
 // =========================================================================
 
 void blur(){
-    int blurImage[SIZE][SIZE] ; // Create a temporary array to store blurred image data
+    int blurImage[SIZE][SIZE][RGB] ; // Create a temporary array to store blurred image data
 
     // Iterate through each pixel in the image
     for (int i = 0 ; i < SIZE ; i++ ){
         for (int j = 0 ; j < SIZE ; j++ ){
-            int sum = 0 ;
-            int count = 0 ;
+            for (int k = 0 ; k < RGB ; k++){
+                int sum = 0 ;
+                int count = 0 ;
 
 
-            // this array to move to neighboring pixel
-            //          { r , l , d , u , dr , dl , ur , ul } -> l = left ,u = up , d = down , r = right
-            int di[8] = { 0 , 0 , 1 , -1 , 1 , 1 , -1 , -1  } ;
-            int dj[8] = { 1 , -1 , 0 , 0 , 1 , -1 , 1 , -1  } ;
+                // this array to move to neighboring pixel
+                //          { r , l , d , u , dr , dl , ur , ul } -> l = left ,u = up , d = down , r = right
+                int di[8] = { 0 , 0 , 1 , -1 , 1 , 1 , -1 , -1  } ;
+                int dj[8] = { 1 , -1 , 0 , 0 , 1 , -1 , 1 , -1  } ;
 
-            // Iterate through 8 neighboring pixels
-            for (int d = 0 ; d < 8 ; d++) {
-                int ni  = i - di[d] , nj = j -dj[d] ;
-                // Check if the neighboring pixel is within the image boundaries
-                if (ni >= 0 && ni < SIZE && nj >= 0 && nj < SIZE) {
-                    sum += image[ni][nj]; // Add neighboring pixel value to sum
-                    count++; // Increment count
+                // Iterate through 8 neighboring pixels
+                for (int d = 0 ; d < 8 ; d++) {
+                    int ni  = i - di[d] , nj = j -dj[d] ;
+
+                    // Check if the neighboring pixel is within the image boundaries
+                    if (ni >= 0 && ni < SIZE && nj >= 0 && nj < SIZE) {
+                        sum += image[ni][nj][k]; // Add neighboring pixel value to sum
+                        count++; // Increment count
+                    }
                 }
-            }
 
-            // Calculate average value and store it in the blur array
-            blurImage[i][j] = sum / count ;
+                // Calculate average value and store it in the blur array
+                blurImage[i][j][k] = sum / count ;
+            }
         }
     }
 
     // Copy the blurred image data back to the original array
     for (int i = 0 ; i < SIZE ; i++ ){
         for (int j = 0 ; j < SIZE ; j++ ){
-            image[i][j] = blurImage[i][j] ;
+            for (int k = 0 ; k < RGB ; k++)
+                image[i][j][k] = blurImage[i][j][k] ;
         }
     }
 
@@ -368,6 +372,8 @@ void blur(){
 
 
 void blur_image(){
+    blur();
+    blur();
     blur();
     blur();
     blur();
@@ -807,7 +813,7 @@ void doSomethingForImage() {
             case 'c':
                 if (loaded == false)
                     loadImage ();
-                // blur_image();
+                blur_image();
                 loaded = true ;
                 break;
 
