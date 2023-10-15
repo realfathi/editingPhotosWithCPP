@@ -41,7 +41,7 @@ void mirror();
 void enlarge();
 void detect_edge();
 void crop();
-//_________________________________________
+// =========================================================================
 
 char menu(){
     char choice ;
@@ -70,7 +70,7 @@ char menu(){
 }
 
 
-//_________________________________________
+// =========================================================================
 
 void loadImage () {
     char imageFileName[100];
@@ -85,7 +85,7 @@ void loadImage () {
 
 }
 
-//_________________________________________
+// =========================================================================
 
 void saveImage () {
     char imageFileName[100];
@@ -99,7 +99,7 @@ void saveImage () {
     writeRGBBMP(imageFileName, image);
 }
 
-//__________________________________________
+// =========================================================================
 
 void load_to_merge(){ // this function to add second image to merge
     char imageFileName2[100];
@@ -114,7 +114,7 @@ void load_to_merge(){ // this function to add second image to merge
 
 }
 
-//_________________________________________
+// =========================================================================
 
 void invert() {
     for (int i = 0; i < SIZE; i++) {
@@ -124,7 +124,7 @@ void invert() {
     // getting the negative of the image by subtracting each pixel from 255
 }
 
-//____________________________________________
+// =========================================================================
 
 void rotate_90(){
     /*
@@ -143,19 +143,19 @@ void rotate_90(){
     }
 }
 
-//____________________________________________
+// =========================================================================
 
 void rotate_180(){
     rotate_90();rotate_90();
 }
 
-//____________________________________________
+// =========================================================================
 
 void rotate_270(){
     rotate_90();rotate_90();rotate_90();
 }
 
-//_____________________________________________
+// =========================================================================
 
 void black_white() {
     for (int i = 0; i < SIZE; i++) {
@@ -174,7 +174,8 @@ void black_white() {
         /*decide if pixel is light or dark then make it black and white*/
     }
 }
-//_____________________________________________
+
+// =========================================================================
 
 void flip(){
 
@@ -219,7 +220,7 @@ void flip(){
 }
 
 
-//_____________________________________________
+// =========================================================================
 
 void darken(){
     // make the image darken by 50%
@@ -231,7 +232,7 @@ void darken(){
     }
 }
 
-//_____________________________________________
+// =========================================================================
 
 void lighten(){
     // make the image lighten by 50%
@@ -247,7 +248,7 @@ void lighten(){
     }
 }
 
-//_____________________________________________
+// =========================================================================
 
 void merge(){
     for (int i = 0; i < SIZE; i++)
@@ -256,7 +257,7 @@ void merge(){
     // divide by 2 to make pixel between 0 & 255
 }
 
-//_____________________________________________
+// =========================================================================
 
 void rotate_image(){
     int n5 = -1 ;
@@ -279,7 +280,7 @@ void rotate_image(){
     }
 }
 
-//_____________________________________________
+// =========================================================================
 
 void darken_lighten(){
     int n6 = -1 ;
@@ -305,7 +306,7 @@ void darken_lighten(){
     }
 }
 
-//_____________________________________________
+// =========================================================================
 
 void blur(){
     int blurImage[SIZE][SIZE] ; // Create a temporary array to store blurred image data
@@ -354,7 +355,7 @@ void blur_image(){
     blur();
 }
 
-//_____________________________________________
+// =========================================================================
 
 void shrink_image(){
     int shrink[SIZE][SIZE][RGB] ; // Create a shrink array to store blurred image data
@@ -414,10 +415,8 @@ void shrink_image(){
     
 }
 
+// =========================================================================
 
-//_____________________________________________
-
-//_____________________________________________
 void mirror(){
     cout<<"1:Left 1/2\n2:Right 1/2\n3:Upper 1/2\n4:Lower 1/2.\n";
     cout<<"Enter a number to select the type of mirroring: ";
@@ -462,7 +461,9 @@ void mirror(){
 
 
 }
-//_____________________________________________
+
+// =========================================================================
+
 void detect_edge() {
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
@@ -476,11 +477,15 @@ void detect_edge() {
             }
         }
     }
-}//see the average between every upper pixel or every side pexel if bigger
-// than 32 (as gradient(light and dark)) make it black and other white
-// I did it like the website dr.ramly gave us (edges are colored)
+}
 
-//_____________________________________________
+/*see the average between every upper pixel or every side pexel if bigger
+ than 32 (as gradient(light and dark)) make it black and other white
+ I did it like the website dr.ramly gave us (edges are colored)
+ */
+
+// =========================================================================
+
 void shuffle(){
     cout<<"Enter the order in numbers:\n";
     for(int k=0; k<4; ++k){
@@ -547,7 +552,9 @@ void shuffle(){
             image[i][j] = image2[i][j];
     }
 }
-//_____________________________________________
+
+// =========================================================================
+
 void shrink_h(float d){
     float step = SIZE/d;
     for(int i=0; i<SIZE; i++){
@@ -578,7 +585,9 @@ void skew_h(){
         step-=move;
     }
 }
-//_____________________________________________
+
+// =========================================================================
+
 void shrink_v(float d){
     float step = SIZE/d;
     float y=0;
@@ -609,8 +618,11 @@ void skew_v(){
         step-=move;
     }
 }
-//_____________________________________________
+
+// =========================================================================
+
 void crop() {
+
     cout << "Enter x ,y ,width ,height:";
     int x, y, width, height;
     cin >> x >> y >> width >> height;
@@ -637,8 +649,11 @@ void crop() {
             }
         }
     }//paste the temp. to our white image
+
 }
-//_____________________________________________
+
+// =========================================================================
+
 void doSomethingForImage() {
 
     char num;
@@ -691,42 +706,49 @@ void doSomethingForImage() {
                 darken_lighten(); // to make the image darken or lighten
                 loaded = true ;
                 break;
+
             case '7':
                 if (loaded == false)
                     loadImage();
                 detect_edge();
                 loaded = true ;
                 break;
+
             case '8':
                 if (loaded == false)
                     loadImage ();
                 // enlarge();
                 loaded = true ;
                 break;
+
             case '9':
                 if (loaded == false)
                     loadImage ();
                 shrink_image();
                 loaded = true ;
                 break;
+
             case 'a':
                 if (loaded == false)
                     loadImage();
                 mirror();
                 loaded = true ;
                 break;
+
             case 'b':
                 if (loaded == false)
                     loadImage();
                 // shuffle();
                 loaded = true ;
                 break;
+
             case 'c':
                 if (loaded == false)
                     loadImage ();
                 // blur_image();
                 loaded = true ;
                 break;
+
             case 'd':
                 if (loaded == false)
                     loadImage();
@@ -740,23 +762,25 @@ void doSomethingForImage() {
                 // skew_h();
                 loaded = true ;
                 break;
+
             case 'f':
                 if (loaded == false)
                     loadImage();
                 // skew_v();
                 loaded = true ;
                 break;
+
             case 's':
                 saveImage ();
                 break;
+
             default : // close the program if you choice zero
                 return ;
         }
     }
 }
 
-//_____________________________________________
-
+// =========================================================================
 
 int main()
 {
