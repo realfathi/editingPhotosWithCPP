@@ -613,14 +613,14 @@ void doSomethingForImage() {
             case '1':
                 if (loaded == false)
                     loadImage();
-                black_white();
+                // black_white();
                 loaded = true ;
                 break;
 
             case '2':
                 if (loaded == false)
                     loadImage();
-                invert();
+                // invert();
                 loaded = true ;
                 break;
 
@@ -630,40 +630,40 @@ void doSomethingForImage() {
                 // This to add second image it .bmp extension and
                 //load image to merge with first image
                 load_to_merge();
-                merge();
+                // merge();
                 loaded = true ;
                 break;
 
             case '4':
                 if (loaded == false)
                     loadImage();
-                flip();
+                // flip();
                 loaded = true ;
                 break;
 
             case '5':
                 if (loaded == false)
                     loadImage();
-                rotate_image();
+                // rotate_image();
                 loaded = true ;
                 break;
 
             case '6':
                 if (loaded == false)
                     loadImage();
-                darken_lighten(); // to make the image darken or lighten
+                // darken_lighten(); // to make the image darken or lighten
                 loaded = true ;
                 break;
             case '7':
                 if (loaded == false)
                     loadImage();
-                detect_edge();
+                // detect_edge();
                 loaded = true ;
                 break;
             case '8':
                 if (loaded == false)
                     loadImage ();
-                enlarge();
+                // enlarge();
                 loaded = true ;
                 break;
             case '9':
@@ -675,38 +675,38 @@ void doSomethingForImage() {
             case 'a':
                 if (loaded == false)
                     loadImage();
-                mirror();
+                // mirror();
                 loaded = true ;
                 break;
             case 'b':
                 if (loaded == false)
                     loadImage();
-                shuffle();
+                // shuffle();
                 loaded = true ;
                 break;
             case 'c':
                 if (loaded == false)
                     loadImage ();
-                blur_image();
+                // blur_image();
                 loaded = true ;
                 break;
             case 'd':
                 if (loaded == false)
                     loadImage();
-                crop();
+                // crop();
                 loaded = true ;
                 break;
 
             case 'e':
                 if (loaded == false)
                     loadImage();
-                skew_h();
+                // skew_h();
                 loaded = true ;
                 break;
             case 'f':
                 if (loaded == false)
                     loadImage();
-                skew_v();
+                // skew_v();
                 loaded = true ;
                 break;
             case 's':
