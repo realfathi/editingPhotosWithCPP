@@ -225,7 +225,8 @@ void darken(){
     // make the image darken by 50%
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            image[i][j] /= 2 ;
+            for (int k = 0 ; k < RGB ; k++)
+                image[i][j][k] /= 2 ;
         }
     }
 }
@@ -236,8 +237,12 @@ void lighten(){
     // make the image lighten by 50%
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            if (image[i][j] <= 205)
-                image[i][j] += 50;
+            for (int k = 0 ; k < RGB ; k++){
+                if (image[i][j][k] <= 205)
+                    image[i][j][k] += 50;
+                else 
+                    image[i][j][k] = 255 ; 
+            }   
         }
     }
 }
@@ -683,7 +688,7 @@ void doSomethingForImage() {
             case '6':
                 if (loaded == false)
                     loadImage();
-                // darken_lighten(); // to make the image darken or lighten
+                darken_lighten(); // to make the image darken or lighten
                 loaded = true ;
                 break;
             case '7':
