@@ -120,7 +120,8 @@ void invert() {
 
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j< SIZE; j++)
-            image[i][j] = 255 - image[i][j] ;
+            for (int k = 0 ; k < RGB ; k++)
+                image[i][j][k] = 255 - image[i][j][k] ;
     }
     // getting the negative of the image by subtracting each pixel from 255
 
@@ -733,7 +734,7 @@ void doSomethingForImage() {
             case '2':
                 if (loaded == false)
                     loadImage();
-                // invert();
+                invert();
                 loaded = true ;
                 break;
 
@@ -743,7 +744,7 @@ void doSomethingForImage() {
                 // This to add second image it .bmp extension and
                 //load image to merge with first image
                 load_to_merge();
-                // merge();
+                merge();
                 loaded = true ;
                 break;
 
