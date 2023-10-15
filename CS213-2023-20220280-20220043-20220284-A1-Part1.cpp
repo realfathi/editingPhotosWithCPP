@@ -41,7 +41,7 @@ void mirror();
 void enlarge();
 void detect_edge();
 void crop();
-//_________________________________________
+// =========================================================================
 
 char menu(){
     char choice ;
@@ -60,8 +60,7 @@ char menu(){
         cout << "s: Save the image to a file \n";
         cout << "0: Exit\n";
         cin >> choice ;
-        if (!(choice >= '0' && choice <= '9' || choice >= 'a' && choice <= 'b' || choice == 'c' 
-            || choice == 'd' || choice == 'e' ||choice == 'f' || choice == 's')){
+        if (!((choice >= '0' && choice <= '9') || (choice >= 'a' && choice <= 'f' ) || choice == 's')){
             cout << "==============\nWrong Number, Please TRY Again !\n\n";
             choice = '.' ; // loop keep working
         }
@@ -71,7 +70,7 @@ char menu(){
 }
 
 
-//_________________________________________
+// =========================================================================
 
 void loadImage () {
     char imageFileName[100];
@@ -86,7 +85,7 @@ void loadImage () {
 
 }
 
-//_________________________________________
+// =========================================================================
 
 void saveImage () {
     char imageFileName[100];
@@ -100,13 +99,13 @@ void saveImage () {
     writeGSBMP(imageFileName, image);
 }
 
-//__________________________________________
+// =========================================================================
 
 void load_to_merge(){ // this function to add second image to merge
     char imageFileName2[100];
 
     // Get gray scale image file name
-    cout << "Enter the source image2 file name:";
+    cout << "Enter the source image2 file name: ";
     cin >> imageFileName2;
 
     // Add to it .bmp extension and load image
@@ -115,19 +114,22 @@ void load_to_merge(){ // this function to add second image to merge
 
 }
 
-//_________________________________________
+// =========================================================================
 
 void invert() {
+
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j< SIZE; j++)
-            image[i][j] = 255 - image[i][j] ;
+                image[i][j] = 255 - image[i][j] ;
     }
     // getting the negative of the image by subtracting each pixel from 255
+
 }
 
-//____________________________________________
+// =========================================================================
 
 void rotate_90(){
+
     /*
     rotating the image 90 degrees clockwise by switching
     the rows with the columns and reversing the columns order
@@ -142,23 +144,25 @@ void rotate_90(){
             image[i][j] = tmp[255-j][i];
         }
     }
+
 }
 
-//____________________________________________
+// =========================================================================
 
 void rotate_180(){
     rotate_90();rotate_90();
 }
 
-//____________________________________________
+// =========================================================================
 
 void rotate_270(){
     rotate_90();rotate_90();rotate_90();
 }
 
-//_____________________________________________
+// =========================================================================
 
 void black_white(){
+
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
 
@@ -167,39 +171,36 @@ void black_white(){
             else
                 image[i][j] = 0 ;
         }
-    }
-    /*decide if pixel is light or dark then make it black and white*/
+    }   /*decide if pixel is light or dark then make it black and white*/
+
 }
 
-//_____________________________________________
+// =========================================================================
 
 void flip(){
 
     int n4 = -1 ;
-    // this loop checks if your choice exists or not
-    // if not choose again
+    // this loop check your choice is exist or not 
+    // if not chooce again
     while (n4 == -1 ){
         cout<<"1:vertically\n2:horizontally\n";
         cout<<"Enter a number to select horizontally or vertically: ";
         cin>>n4;
-
         if (n4==1){ // vertically
-            /*swapping the values between the top and bottom rows*/
             for (int i = 0; i < SIZE/2; i++) {
                 for (int j = 0; j < SIZE; j++) {
                     int tmp = image[i][j];
-                    image[i][j]=image[SIZE-i][j];
-                    image[SIZE-i][j]=tmp;
+                    image[i][j] = image[SIZE-i][j];
+                    image[SIZE-i][j] = tmp;
                 }
             }
         }
-            /*swapping the values between the top and bottom column*/
         else if (n4==2){ // horizontally
             for (int i = 0; i < SIZE; i++) {
                 for (int j = 0; j < SIZE/2; j++) {
                     int tmp = image[i][j];
-                    image[i][j]=image[i][SIZE-j];
-                    image[i][SIZE-j]=tmp;
+                    image[i][j] = image[i][SIZE-j];
+                    image[i][SIZE-j] = tmp;
                 }
             }
         }
@@ -208,45 +209,54 @@ void flip(){
             n4 = - 1 ; // loop keep working
         }
     }
+
 }
 
-//_____________________________________________
+
+// =========================================================================
 
 void darken(){
-    // make the image darken by 50%
+
+    // make the image darken by 50% 
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             image[i][j] /= 2 ;
         }
     }
+    
 }
 
-//_____________________________________________
+// =========================================================================
 
 void lighten(){
+
     // make the image lighten by 50%
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            if (image[i][j] <= 205)
-                image[i][j] += 50 ;
-            else 
-                image[i][j][k] = 255 ;
+                if (image[i][j] <= 205)
+                    image[i][j] += 50;
+                else 
+                    image[i][j] = 255 ;   
         }
     }
+
 }
 
-//_____________________________________________
+// =========================================================================
 
 void merge(){
+
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j < SIZE; j++)
-            image[i][j] = (image[i][j] + image2[i][j]) / 2;
+                image[i][j] = ( image[i][j] + image2[i][j] ) / 2;
     // divide by 2 to make pixel between 0 & 255
+
 }
 
-//_____________________________________________
+// =========================================================================
 
 void rotate_image(){
+
     int n5 = -1 ;
     // this loop checks if your choice exists or not
     // if not choose again
@@ -265,11 +275,13 @@ void rotate_image(){
             n5 = -1 ; // loop keep working
         }
     }
+
 }
 
-//_____________________________________________
+// =========================================================================
 
 void darken_lighten(){
+
     int n6 = -1 ;
     // this loop checks if your choice exists or not
     // if not choose again
@@ -291,9 +303,10 @@ void darken_lighten(){
             n6 = -1 ; // loop keep working
         }
     }
+
 }
 
-//_____________________________________________
+// =========================================================================
 
 void blur(){
     int blurImage[SIZE][SIZE] ; // Create a temporary array to store blurred image data
@@ -301,18 +314,19 @@ void blur(){
     // Iterate through each pixel in the image
     for (int i = 0 ; i < SIZE ; i++ ){
         for (int j = 0 ; j < SIZE ; j++ ){
-            int sum = 0 ; 
+            int sum = 0 ;
             int count = 0 ;
 
 
-            // this array to move to neighboring pixel 
-            //          { r , l , d , u , dr , dl , ur , ul } -> l = left ,u = up , d = down , r = right 
+            // this array to move to neighboring pixel
+            //          { r , l , d , u , dr , dl , ur , ul } -> l = left ,u = up , d = down , r = right
             int di[8] = { 0 , 0 , 1 , -1 , 1 , 1 , -1 , -1  } ;
-            int dj[8] = { 1 , -1 , 0 , 0 , 1 , -1 , 1 , -1  } ; 
+            int dj[8] = { 1 , -1 , 0 , 0 , 1 , -1 , 1 , -1  } ;
 
             // Iterate through 8 neighboring pixels
             for (int d = 0 ; d < 8 ; d++) {
                 int ni  = i - di[d] , nj = j -dj[d] ;
+
                 // Check if the neighboring pixel is within the image boundaries
                 if (ni >= 0 && ni < SIZE && nj >= 0 && nj < SIZE) {
                     sum += image[ni][nj]; // Add neighboring pixel value to sum
@@ -320,15 +334,15 @@ void blur(){
                 }
             }
 
-            // Calculate average value and store it in the blur array
-            blurImage[i][j] = sum / count ; 
+                // Calculate average value and store it in the blur array
+                blurImage[i][j] = sum / count ;
         }
     }
 
     // Copy the blurred image data back to the original array
     for (int i = 0 ; i < SIZE ; i++ ){
         for (int j = 0 ; j < SIZE ; j++ ){
-            image[i][j] = blurImage[i][j] ;
+                image[i][j] = blurImage[i][j] ;
         }
     }
 
@@ -340,11 +354,15 @@ void blur_image(){
     blur();
     blur();
     blur();
+    blur();
+    blur();
 }
 
-//_____________________________________________
+// =========================================================================
 
 void shrink_image(){
+    int shrink[SIZE][SIZE] 
+    ; // Create a shrink array to store blurred image data
 
     int n9 = -1 ; 
     while (n9 == -1){
@@ -352,39 +370,38 @@ void shrink_image(){
         cout << "1: 1/2\n2: 1/3\n3: 1/4 \n";
         cout << "Enter a number to select dimension of shrink the image: ";
         cin >> n9 ;
+      
         // to make image background is wihte 
         for(int i = 0 ; i < SIZE ; i++){
             for(int j = 0 ; j < SIZE ; j++){
-                image2[i][j] = image[i][j] ;
-                image[i][j] = 255 ;
+                    shrink[i][j] = image[i][j] ;
+                    image[i][j] = 255 ;
             }
         }
-      
+
         // first condition
         if (n9 == 1 ){
             for(int i = 0 ; i < SIZE /2; i++){
                 for(int j = 0 ; j < SIZE /2 ; j++){
-                    image[i][j] = image2[i*2][j*2] ;
+                        image[i][j] = shrink[i*2][j*2];
                 }
             }
             return ;
         }
-          
         // second condition
         else if (n9 == 2 ){
             for(int i = 0 ; i < SIZE /3; i++){
                 for(int j = 0 ; j < SIZE /3 ; j++){
-                    image[i][j] = image2[i*3][j*3] ;
+                        image[i][j] = shrink[i*3][j*3] ;
                 }
             }
             return ;
         }
-          
         // third condition
         else if (n9 == 3 ){
             for(int i = 0 ; i < SIZE /4; i++){
                 for(int j = 0 ; j < SIZE /4 ; j++){
-                    image[i][j] = image2[i*4][j*4] ;
+                        image[i][j] = shrink[i*4][j*4] ;
                 }
             }
             return ;
@@ -397,69 +414,92 @@ void shrink_image(){
     
 }
 
-//_____________________________________________
+// =========================================================================
 
-//_____________________________________________
 void mirror(){
+
     cout<<"1:Left 1/2\n2:Right 1/2\n3:Upper 1/2\n4:Lower 1/2.\n";
     cout<<"Enter a number to select the type of mirroring: ";
-    int n10; cin>>n10;
+    int n10; 
+    cin>>n10;
     if (n10==1){
+        //write the first col. to last col
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                image[i][SIZE-j] = image[i][j];
+                    image[i][SIZE-j] = image[i][j];
             }
-        }
-    }//write the first col. to last col.
-    else if (n10==2){
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                image[i][j] = image[i][SIZE-j];
-            }
-        }}//write the last col. to first col.
-    else if(n10==3){
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                image[SIZE -i][j] = image[i][j];
-            }
-        }
-    }//write the upper(first) row to the last row
-    else if(n10==4){
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                image[i][j] = image[SIZE-i][j];
-            }
-        }
-    }//write the last row to the first row
-    else 
-        cout<<"\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
-
-
-}
-//_____________________________________________
-void detect_edge(){
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            if ((abs(image[i][j]) - abs(image[i][j + 1])) >= 32 || (abs(image[i][j]) - abs(image[i + 1][j])) >= 30)
-                image[i][j] = 0;
-            else
-                image[i][j] = 255;
-
         }
     }
-}//see the average between every upper pixel or every side pexel if bigger
-// than 32 (as gradient(light and dark)) make it black and other white
-//_____________________________________________
+
+    else if (n10==2){
+        //write the last col. to first col.
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                    image[i][j] = image[i][SIZE-j];
+            }
+        }
+    }
+
+    else if(n10==3){
+        //write the upper(first) row to the last row
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                    image[SIZE -i][j] = image[i][j];
+            }
+        } 
+    }
+
+    else if(n10==4){
+        //write the last row to the first row
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                    image[i][j] = image[SIZE-i][j];
+            }
+        }
+    }
+
+    else
+        cout<<"\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
+
+}
+
+// =========================================================================
+
+void detect_edge() {
+
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) { 
+
+                /*see the average between every upper pixel or every side pexel if bigger
+                than 32 (as gradient(light and dark)) make it black and other white
+                I did it like the website dr.ramly gave us (edges are colored)
+                */
+
+                if ((abs(image[i][j]) - abs(image[i][j + 1])) >= 32 || (abs(image[i][j]) - abs(image[i + 1][j])) >= 30)
+                    image[i][j] = 0;
+                else
+                    image[i][j] = 255;
+        }
+    }
+
+}
+
+
+
+// =========================================================================
+
 void shuffle(){
     cout<<"Enter the order in numbers:\n";
     for(int k=0; k<4; ++k){
         int o; cin>>o;
-        if(o==1){
-            int x=128, y;
-            if(k == 0 or k==1)x=0;
+        if(o == 1){
+            int x = 128 , y ;
+            if(k == 0 or k == 1)
+                x=0;
             for (int i = 0; i < SIZE/2; i++){
                 y=0;
-                if(k==1 or k==3)y=128;
+                if(k == 1 or k == 3)
+                    y=128;
                 for (int j =0; j<SIZE/2; j++){
                     image2[x][y] = image[i][j];
                     y++;
@@ -468,11 +508,13 @@ void shuffle(){
             }
         }
         else if(o==2){
-            int x=128, y;
-            if(k == 0 or k==1)x=0;
+            int x = 128 , y ;
+            if(k == 0 or k==1)
+                x=0;
             for (int i = 0; i < SIZE/2; i++) {
                 y=0;
-                if(k==1 or k==3)y=128;
+                if(k==1 or k==3)
+                    y=128;
                 for (int j = SIZE/2; j<SIZE; j++){
                     image2[x][y] = image[i][j];
                     y++;
@@ -480,12 +522,14 @@ void shuffle(){
                 x++;
             }
         }
-        else if(o==3){
-            int x=128, y;
-            if(k == 0 or k==1)x=0;
+        else if(o == 3){
+            int x = 128 , y ;
+            if(k == 0 or k==1)
+                x=0;
             for (int i = SIZE/2; i < SIZE; i++) {
                 y=0;
-                if(k==1 or k==3)y=128;
+                if(k == 1 or k == 3)
+                    y=128;
                 for (int j = 0; j<SIZE/2; j++){
                     image2[x][y] = image[i][j];
                     y++;
@@ -493,32 +537,40 @@ void shuffle(){
                 x++;
             }
         }
-        else if(o==4){
-            int x=128, y;
-            if(k == 0 or k==1)x=0;
+        else if(o == 4){
+            int x = 128 , y ;
+            if(k == 0 or k == 1)
+                x=0;
             for (int i = SIZE/2; i < SIZE; i++) {
                 y=0;
-                if(k==1 or k==3)y=128;
-                for (int j = SIZE/2; j<SIZE; j++){
+                if(k == 1 or k == 3)
+                    y=128;
+                for (int j = SIZE/2 ; j<SIZE; j++){
                     image2[x][y] = image[i][j];
                     y++;
                 }
                 x++;
             }
         }
-      else {
-        cout<<"Wrong number!\n";
-        k--;
-      }
+        else {
+            cout << "\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
+            k--;
+        }
     }
+
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++)
             image[i][j] = image2[i][j];
     }
+
 }
-//_____________________________________________
+
+// =========================================================================
+
 void shrink_h(float d){
+
     float step = SIZE/d;
+
     for(int i=0; i<SIZE; i++){
         float y=0;
         for(int j=0; j<d; j++){
@@ -526,18 +578,24 @@ void shrink_h(float d){
             image2[i][j]=image[i][int(y)];
         }
     }
+
 }
+
 void skew_h(){
+
     int b;
     cout<<"Enter your angle: ";
     cin>>b;
     double a = tan((M_PI/180)*b);
     float x = floor(256/ (1 + 1/a));
     shrink_h(x);
+
     for(int i=0; i<SIZE; i++){
         for(int j=0; j<SIZE; j++)image[i][j]=255;
     }
+
     double step = SIZE - x; double move = step/SIZE;
+
     for(int i=0; i<SIZE; i++){
         int ct = step + x, y=0;
         for(int j=step; j<ct; ++j){
@@ -546,29 +604,40 @@ void skew_h(){
         }
         step-=move;
     }
+
 }
-//_____________________________________________
+
+// =========================================================================
+
 void shrink_v(float d){
+
     float step = SIZE/d;
     float y=0;
+
     for(int i=0; i<d; i++){
         y+=step;
         for(int j=0; j<SIZE; j++){
             image2[i][j]=image[int(y)][j];
         }
     }
+
 }
+
 void skew_v(){
+
     int b;
     cout<<"Enter your angle: ";
     cin>>b;
     double a = tan((M_PI/180)*b);
     float x = floor(256/ (1 + 1/a));
     shrink_v(x);
+
     for(int i=0; i<SIZE; i++){
         for(int j=0; j<SIZE; j++)image[i][j]=255;
     }
+
     double step = SIZE - x; double move = step/SIZE;
+
     for(int i=0; i<SIZE; i++){
         int ct = step + x, y=0;
         for(int j=step; j<ct; ++j){
@@ -577,42 +646,54 @@ void skew_v(){
         }
         step-=move;
     }
+
 }
-//_____________________________________________
+
+// =========================================================================
+
 void crop() {
-    cout<<"Enter x ,y ,width ,height:";
+
+    cout << "Enter x ,y ,width ,height:";
     int x, y, width, height;
     cin >> x >> y >> width >> height;
+
     for (int i = 0; i < width; i++) {
-        for (int j = 0; j < height; j++) {
+        for (int j = 0; j < height; j++) { // fill a temp. image the cropped photo
             croppedImage[i][j] = image[x + i][y + j];
         }
-    }//fill a temp. image the cropped photo
+    } 
+
+    // make original the image white
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             image[i][j] = 255;
         }
-    }//make original the image white
+    }
+    
+    // paste the temp. to our white image
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
             image[i + x][y + j] = croppedImage[i][j];
         }
     }
-}//paste the temp. to our white image
-//_____________________________________________
+    
+}
+
+// =========================================================================
+
 void doSomethingForImage() {
 
     char num;
     bool loaded = false ;
     while (true) {
         num = menu() ; // return what we choice from menu
-        select = num ; 
+        select = num ;
         switch (select) {
             case '1':
                 if (loaded == false)
                     loadImage();
                 black_white();
-                loaded = true ; 
+                loaded = true ;
                 break;
 
             case '2':
@@ -652,42 +733,49 @@ void doSomethingForImage() {
                 darken_lighten(); // to make the image darken or lighten
                 loaded = true ;
                 break;
+
             case '7':
                 if (loaded == false)
                     loadImage();
                 detect_edge();
                 loaded = true ;
                 break;
+
             case '8':
                 if (loaded == false)
                     loadImage ();
-                enlarge(); 
+                // enlarge();
                 loaded = true ;
                 break;
+
             case '9':
                 if (loaded == false)
                     loadImage ();
-                shrink_image(); 
-                loaded = true ;        
+                shrink_image();
+                loaded = true ;
                 break;
+
             case 'a':
                 if (loaded == false)
                     loadImage();
                 mirror();
                 loaded = true ;
                 break;
+
             case 'b':
-              if (loaded == false)
+                if (loaded == false)
                     loadImage();
                 shuffle();
                 loaded = true ;
                 break;
+
             case 'c':
                 if (loaded == false)
                     loadImage ();
-                blur_image(); 
+                blur_image();
                 loaded = true ;
                 break;
+
             case 'd':
                 if (loaded == false)
                     loadImage();
@@ -696,31 +784,33 @@ void doSomethingForImage() {
                 break;
 
             case 'e':
-              if (loaded == false)
+                if (loaded == false)
                     loadImage();
                 skew_h();
                 loaded = true ;
                 break;
+
             case 'f':
                 if (loaded == false)
                     loadImage();
                 skew_v();
                 loaded = true ;
                 break;
+
             case 's':
                 saveImage ();
                 break;
-            default : // close the program if you choice zero 
+
+            default : // close the program if you choice zero
                 return ;
         }
     }
 }
 
-//_____________________________________________
-
+// =========================================================================
 
 int main()
 {
-  doSomethingForImage();
-  return 0;
+    doSomethingForImage();
+    return 0;
 }
