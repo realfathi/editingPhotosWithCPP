@@ -254,7 +254,33 @@ void merge(){
 }
 
 // =========================================================================
-
+void enlarge(){
+        cout<<"Pick a quarter to enlarge: ";
+        int x=0, a=0, b=0, ni=128, nj=128, q;
+        cin>>q;
+        if(!(q&1)) b=128,nj=SIZE;
+        if(q>2 and q<5) a=128,ni=SIZE;
+        if(4<q or q<1){
+            cout<<"Wrong number!\n Enter a number between 1 and 4!\n";
+            enlarge();
+        }
+        for (int i=a; i < ni; i++) {
+            int y=0;
+            for (int j=b; j<nj; j++){
+                image2[x][y]=image[i][j];
+                image2[x+1][y]=image[i][j];
+                image2[x][y+1]=image[i][j];
+                image2[x+1][y+1]=image[i][j];
+                y+=2;
+            }
+            x+=2;
+        }
+      for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++)
+            image[i][j] = image2[i][j];
+    }
+}
+// =========================================================================
 void rotate_image(){
 
     int n5 = -1 ;
