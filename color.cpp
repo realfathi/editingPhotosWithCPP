@@ -123,7 +123,7 @@ void invert() {
             image[i][j] = 255 - image[i][j] ;
     }
     // getting the negative of the image by subtracting each pixel from 255
-    
+
 }
 
 // =========================================================================
@@ -595,6 +595,7 @@ void shuffle(){
 void shrink_h(float d){
 
     float step = SIZE/d;
+
     for(int i=0; i<SIZE; i++){
         float y=0;
         for(int j=0; j<d; j++){
@@ -613,10 +614,13 @@ void skew_h(){
     double a = tan((M_PI/180)*b);
     float x = floor(256/ (1 + 1/a));
     shrink_h(x);
+
     for(int i=0; i<SIZE; i++){
         for(int j=0; j<SIZE; j++)image[i][j]=255;
     }
+
     double step = SIZE - x; double move = step/SIZE;
+
     for(int i=0; i<SIZE; i++){
         int ct = step + x, y=0;
         for(int j=step; j<ct; ++j){
@@ -634,6 +638,7 @@ void shrink_v(float d){
 
     float step = SIZE/d;
     float y=0;
+
     for(int i=0; i<d; i++){
         y+=step;
         for(int j=0; j<SIZE; j++){
@@ -651,10 +656,13 @@ void skew_v(){
     double a = tan((M_PI/180)*b);
     float x = floor(256/ (1 + 1/a));
     shrink_v(x);
+
     for(int i=0; i<SIZE; i++){
         for(int j=0; j<SIZE; j++)image[i][j]=255;
     }
+
     double step = SIZE - x; double move = step/SIZE;
+    
     for(int i=0; i<SIZE; i++){
         int ct = step + x, y=0;
         for(int j=step; j<ct; ++j){
