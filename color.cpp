@@ -1,7 +1,7 @@
 /*
                                             Assignment 1 - OOP
                                                    Part 2
-Date: 13 October 2023
+Date: 15 October 2023
 Purpose: Demonstrate use of bmplip for handling  / load a gray image and store in another file
 Supervised by Dr.Mohammad El-Ramly
 
