@@ -20,9 +20,9 @@ Version: 1.0 (Demo)
 #include <bits/stdc++.h>
 #include "bmplib.cpp"
 using namespace std;
-unsigned char image[SIZE][SIZE][3];
-unsigned char image2[SIZE][SIZE][3];
-unsigned char croppedImage[SIZE][SIZE][3];
+unsigned char image[SIZE][SIZE][RGB];
+unsigned char image2[SIZE][SIZE][RGB];
+unsigned char croppedImage[SIZE][SIZE][RGB];
 
 char select ; // Global variable
 
@@ -342,18 +342,22 @@ void blur_image(){
 //_____________________________________________
 
 void shrink_image(){
+    int shrink[SIZE][SIZE][RGB] ; // Create a shrink array to store blurred image data
 
-    int n9 = -1 ;
+    int n9 = -1 ; 
     while (n9 == -1){
         cout << "shrink the image dimensions to: \n";
         cout << "1: 1/2\n2: 1/3\n3: 1/4 \n";
         cout << "Enter a number to select dimension of shrink the image: ";
         cin >> n9 ;
-        // to make image background is wihte
+      
+        // to make image background is wihte 
         for(int i = 0 ; i < SIZE ; i++){
             for(int j = 0 ; j < SIZE ; j++){
-                image2[i][j] = image[i][j] ;
-                image[i][j] = 255 ;
+                for (int k = 0 ; k < RGB ; k++){
+                    shrink[i][j][k] = image[i][j][k] ;
+                    image[i][j][k] = 255 ;
+                }
             }
         }
 
@@ -361,27 +365,28 @@ void shrink_image(){
         if (n9 == 1 ){
             for(int i = 0 ; i < SIZE /2; i++){
                 for(int j = 0 ; j < SIZE /2 ; j++){
-                    image[i][j] = image2[i*2][j*2] ;
+                    for (int k = 0 ; k < RGB ; k++)
+                        image[i][j][k] = shrink[i*2][j*2][k] ;
                 }
             }
             return ;
         }
-
-            // second condition
+        // second condition
         else if (n9 == 2 ){
             for(int i = 0 ; i < SIZE /3; i++){
                 for(int j = 0 ; j < SIZE /3 ; j++){
-                    image[i][j] = image2[i*3][j*3] ;
+                    for (int k = 0 ; k < RGB ; k++)
+                        image[i][j][k] = shrink[i*3][j*3][k] ;
                 }
             }
             return ;
         }
-
-            // third condition
+        // third condition
         else if (n9 == 3 ){
             for(int i = 0 ; i < SIZE /4; i++){
                 for(int j = 0 ; j < SIZE /4 ; j++){
-                    image[i][j] = image2[i*4][j*4] ;
+                    for (int k = 0 ; k < RGB ; k++)
+                        image[i][j][k] = shrink[i*4][j*4][k] ;
                 }
             }
             return ;
@@ -391,8 +396,9 @@ void shrink_image(){
             n9 = -1 ; // loop keep working
         }
     }
-
+    
 }
+
 
 //_____________________________________________
 
