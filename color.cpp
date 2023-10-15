@@ -60,7 +60,7 @@ char menu(){
         cout << "s: Save the image to a file \n";
         cout << "0: Exit\n";
         cin >> choice ;
-        if (!(choice >= '0' && choice <= '9' || choice >= 'a' && choice <= 'f' || choice == 's')){
+        if (!((choice >= '0' && choice <= '9') || (choice >= 'a' && choice <= 'f') || choice == 's')){
             cout << "==============\nWrong Number, Please TRY Again !\n\n";
             choice = '.' ; // loop keep working
         }
