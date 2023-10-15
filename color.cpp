@@ -11,7 +11,7 @@ Ahmed Mostafa Muhammad -   20220043  - 05.ahmedmustafa@gmail.com
 Muhammad Gamal ALi     -   20220284  - mohamedgamal200420042004@gmail.com
 
 Version: 1.0 (Demo)
-15 Filters Black and White images....
+15 Filters color images....
 
 
 
