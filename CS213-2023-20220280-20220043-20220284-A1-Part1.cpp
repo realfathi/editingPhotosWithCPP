@@ -60,7 +60,8 @@ char menu(){
         cout << "s: Save the image to a file \n";
         cout << "0: Exit\n";
         cin >> choice ;
-        if (!(choice >= '0' && choice <= '9' || choice >= 'a' && choice <= 'f' || choice == 's')){
+        if (!(choice >= '0' && choice <= '9' || choice >= 'a' && choice <= 'b' || choice == 'c' 
+            || choice == 'd' || choice == 'e' ||choice == 'f' || choice == 's')){
             cout << "==============\nWrong Number, Please TRY Again !\n\n";
             choice = '.' ; // loop keep working
         }
@@ -227,7 +228,9 @@ void lighten(){
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             if (image[i][j] <= 205)
-                image[i][j] += 50;
+                image[i][j] += 50 ;
+            else 
+                image[i][j][k] = 255 ;
         }
     }
 }
