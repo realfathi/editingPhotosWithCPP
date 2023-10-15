@@ -407,27 +407,27 @@ void mirror(){
                 image[i][SIZE-j] = image[i][j];
             }
         }
-    }
+    }//write the first col. to last col.
     else if (n10==2){
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 image[i][j] = image[i][SIZE-j];
             }
-        }}
+        }}//write the last col. to first col.
     else if(n10==3){
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 image[SIZE -i][j] = image[i][j];
             }
         }
-    }
+    }//write the upper(first) row to the last row
     else if(n10==4){
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 image[i][j] = image[SIZE-i][j];
             }
         }
-    }
+    }//write the last row to the first row
     else 
         cout<<"\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
 
@@ -444,7 +444,8 @@ void detect_edge(){
 
         }
     }
-}
+}//see the average between every upper pixel or every side pexel if bigger
+// than 32 (as gradient(light and dark)) make it black and other white
 //_____________________________________________
 void shuffle(){
     cout<<"Enter the order in numbers:\n";
@@ -583,18 +584,18 @@ void crop() {
         for (int j = 0; j < height; j++) {
             croppedImage[i][j] = image[x + i][y + j];
         }
-    }
+    }//fill a temp. image the cropped photo
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             image[i][j] = 255;
         }
-    }
+    }//make original the image white
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
             image[i + x][y + j] = croppedImage[i][j];
         }
     }
-}
+}//paste the temp. to our white image
 //_____________________________________________
 void doSomethingForImage() {
 
