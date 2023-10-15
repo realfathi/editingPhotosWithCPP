@@ -1,6 +1,6 @@
 /*
                                             Assignment 1 - OOP
-                                                   Part 2
+  
 Date: 15 October 2023
 Purpose: Demonstrate use of bmplip for handling  / load a color image and store in another file
 Supervised by Dr.Mohammad El-Ramly
@@ -60,7 +60,7 @@ char menu(){
         cout << "s: Save the image to a file \n";
         cout << "0: Exit\n";
         cin >> choice ;
-        if (!((choice >= '0' && choice <= '9') || (choice >= 'a' && choice <= 'f') || choice == 's')){
+        if (!((choice >= '0' && choice <= '9') || (choice >= 'a' && choice <= 'f' ) || choice == 's')){
             cout << "==============\nWrong Number, Please TRY Again !\n\n";
             choice = '.' ; // loop keep working
         }
@@ -105,7 +105,7 @@ void load_to_merge(){ // this function to add second image to merge
     char imageFileName2[100];
 
     // Get gray scale image file name
-    cout << "Enter the source image2 file name:";
+    cout << "Enter the source image2 file name: ";
     cin >> imageFileName2;
 
     // Add to it .bmp extension and load image
@@ -129,36 +129,36 @@ void invert() {
 
 // =========================================================================
 
-void rotate_90(){
+// void rotate_90(){
 
-    /*
-    rotating the image 90 degrees clockwise by switching
-    the rows with the columns and reversing the columns order
-    */
-    unsigned char tmp [SIZE][SIZE];
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j< SIZE; j++)
-            tmp[i][j]=image[i][j];
-    }
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j< SIZE; j++){
-            image[i][j] = tmp[255-j][i];
-        }
-    }
+//     /*
+//     rotating the image 90 degrees clockwise by switching
+//     the rows with the columns and reversing the columns order
+//     */
+//     unsigned char tmp [SIZE][SIZE];
+//     for (int i = 0; i < SIZE; i++) {
+//         for (int j = 0; j< SIZE; j++)
+//             tmp[i][j]=image[i][j];
+//     }
+//     for (int i = 0; i < SIZE; i++) {
+//         for (int j = 0; j< SIZE; j++){
+//             image[i][j] = tmp[255-j][i];
+//         }
+//     }
 
-}
-
-// =========================================================================
-
-void rotate_180(){
-    rotate_90();rotate_90();
-}
+// }
 
 // =========================================================================
 
-void rotate_270(){
-    rotate_90();rotate_90();rotate_90();
-}
+// void rotate_180(){
+//     rotate_90();rotate_90();
+// }
+
+// =========================================================================
+
+// void rotate_270(){
+//     rotate_90();rotate_90();rotate_90();
+// }
 
 // =========================================================================
 
@@ -198,7 +198,7 @@ void flip(){
             /*swapping the values between the top and bottom rows*/
             for (int i = 0; i < SIZE / 2; i++) {
                 for (int j = 0; j < SIZE; j++) {
-                    for (int k = 0; k <3; ++k) {
+                    for (int k = 0; k < RGB ; ++k) {
 
                         int tmp = image[i][j][k];
                         image[i][j][k] = image[SIZE - i][j][k];
@@ -211,7 +211,7 @@ void flip(){
         else if (n4==2) { // horizontally
             for (int i = 0; i < SIZE; i++) {
                 for (int j = 0; j < SIZE / 2; j++) {
-                    for (int k = 0; k <3; ++k) {
+                    for (int k = 0; k < RGB ; ++k) {
                         int tmp = image[i][j][k];
                         image[i][j][k] = image[i][SIZE - j][k];
                         image[i][SIZE - j][k] = tmp;
@@ -274,28 +274,28 @@ void merge(){
 
 // =========================================================================
 
-void rotate_image(){
+// void rotate_image(){
 
-    int n5 = -1 ;
-    // this loop checks if your choice exists or not
-    // if not choose again
-    while (n5 == -1 ){
-        cout << "1: 90º\n2: 180º\n3: 270º\n";
-        cout << "Enter a number to select the angel:\n";
-        cin >> n5;
-        if (n5 == 1)
-            rotate_90();
-        else if (n5 == 2)
-            rotate_180();
-        else if (n5 == 3)
-            rotate_270();
-        else {
-            cout << "\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
-            n5 = -1 ; // loop keep working
-        }
-    }
+//     int n5 = -1 ;
+//     // this loop checks if your choice exists or not
+//     // if not choose again
+//     while (n5 == -1 ){
+//         cout << "1: 90º\n2: 180º\n3: 270º\n";
+//         cout << "Enter a number to select the angel:\n";
+//         cin >> n5;
+//         if (n5 == 1)
+//             rotate_90();
+//         else if (n5 == 2)
+//             rotate_180();
+//         else if (n5 == 3)
+//             rotate_270();
+//         else {
+//             cout << "\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
+//             n5 = -1 ; // loop keep working
+//         }
+//     }
 
-}
+// }
 
 // =========================================================================
 
@@ -452,7 +452,7 @@ void mirror(){
         //write the first col. to last col
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                for (int k = 0; k < 3; ++k) {
+                for (int k = 0; k < RGB ; ++k) {
                     image[i][SIZE-j][k] = image[i][j][k];
                 }
             }
@@ -463,7 +463,7 @@ void mirror(){
         //write the last col. to first col.
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                for (int k = 0; k <3 ; ++k) {
+                for (int k = 0; k < RGB ; ++k) {
                     image[i][j][k] = image[i][SIZE-j][k];
                 }
             }
@@ -474,7 +474,7 @@ void mirror(){
         //write the upper(first) row to the last row
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                for (int k = 0; k < 3; ++k) {
+                for (int k = 0; k < RGB ; ++k) {
                     image[SIZE -i][j][k] = image[i][j][k];
                 }
             }
@@ -485,7 +485,7 @@ void mirror(){
         //write the last row to the first row
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                for (int k = 0; k < 3; ++k) {
+                for (int k = 0; k < RGB ; ++k) {
                     image[i][j][k] = image[SIZE-i][j][k];
                 }
             }
@@ -500,9 +500,15 @@ void mirror(){
 // =========================================================================
 
 void detect_edge() {
+
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            for (int k = 0; k < 3; ++k) {
+            for (int k = 0; k < RGB ; ++k) {
+
+                /*see the average between every upper pixel or every side pexel if bigger
+                than 32 (as gradient(light and dark)) make it black and other white
+                I did it like the website dr.ramly gave us (edges are colored)
+                */
 
                 if ((abs(image[i][j][k]) - abs(image[i][j + 1][k])) >= 32 || (abs(image[i][j][k]) - abs(image[i + 1][j][k])) >= 30)
                     image[i][j][k] = 0;
@@ -512,175 +518,173 @@ void detect_edge() {
             }
         }
     }
+
 }
 
-/*see the average between every upper pixel or every side pexel if bigger
- than 32 (as gradient(light and dark)) make it black and other white
- I did it like the website dr.ramly gave us (edges are colored)
- */
+
 
 // =========================================================================
 
-void shuffle(){
-    cout<<"Enter the order in numbers:\n";
-    for(int k=0; k<4; ++k){
-        int o; cin>>o;
-        if(o == 1){
-            int x = 128 , y ;
-            if(k == 0 or k == 1)
-                x=0;
-            for (int i = 0; i < SIZE/2; i++){
-                y=0;
-                if(k == 1 or k == 3)
-                    y=128;
-                for (int j =0; j<SIZE/2; j++){
-                    image2[x][y] = image[i][j];
-                    y++;
-                }
-                x++;
-            }
-        }
-        else if(o==2){
-            int x = 128 , y ;
-            if(k == 0 or k==1)
-                x=0;
-            for (int i = 0; i < SIZE/2; i++) {
-                y=0;
-                if(k==1 or k==3)
-                    y=128;
-                for (int j = SIZE/2; j<SIZE; j++){
-                    image2[x][y] = image[i][j];
-                    y++;
-                }
-                x++;
-            }
-        }
-        else if(o == 3){
-            int x = 128 , y ;
-            if(k == 0 or k==1)
-                x=0;
-            for (int i = SIZE/2; i < SIZE; i++) {
-                y=0;
-                if(k == 1 or k == 3)
-                    y=128;
-                for (int j = 0; j<SIZE/2; j++){
-                    image2[x][y] = image[i][j];
-                    y++;
-                }
-                x++;
-            }
-        }
-        else if(o == 4){
-            int x = 128 , y ;
-            if(k == 0 or k == 1)
-                x=0;
-            for (int i = SIZE/2; i < SIZE; i++) {
-                y=0;
-                if(k == 1 or k == 3)
-                    y=128;
-                for (int j = SIZE/2 ; j<SIZE; j++){
-                    image2[x][y] = image[i][j];
-                    y++;
-                }
-                x++;
-            }
-        }
-        else {
-            cout << "\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
-            k--;
-        }
-    }
+// void shuffle(){
+//     cout<<"Enter the order in numbers:\n";
+//     for(int k=0; k<4; ++k){
+//         int o; cin>>o;
+//         if(o == 1){
+//             int x = 128 , y ;
+//             if(k == 0 or k == 1)
+//                 x=0;
+//             for (int i = 0; i < SIZE/2; i++){
+//                 y=0;
+//                 if(k == 1 or k == 3)
+//                     y=128;
+//                 for (int j =0; j<SIZE/2; j++){
+//                     image2[x][y] = image[i][j];
+//                     y++;
+//                 }
+//                 x++;
+//             }
+//         }
+//         else if(o==2){
+//             int x = 128 , y ;
+//             if(k == 0 or k==1)
+//                 x=0;
+//             for (int i = 0; i < SIZE/2; i++) {
+//                 y=0;
+//                 if(k==1 or k==3)
+//                     y=128;
+//                 for (int j = SIZE/2; j<SIZE; j++){
+//                     image2[x][y] = image[i][j];
+//                     y++;
+//                 }
+//                 x++;
+//             }
+//         }
+//         else if(o == 3){
+//             int x = 128 , y ;
+//             if(k == 0 or k==1)
+//                 x=0;
+//             for (int i = SIZE/2; i < SIZE; i++) {
+//                 y=0;
+//                 if(k == 1 or k == 3)
+//                     y=128;
+//                 for (int j = 0; j<SIZE/2; j++){
+//                     image2[x][y] = image[i][j];
+//                     y++;
+//                 }
+//                 x++;
+//             }
+//         }
+//         else if(o == 4){
+//             int x = 128 , y ;
+//             if(k == 0 or k == 1)
+//                 x=0;
+//             for (int i = SIZE/2; i < SIZE; i++) {
+//                 y=0;
+//                 if(k == 1 or k == 3)
+//                     y=128;
+//                 for (int j = SIZE/2 ; j<SIZE; j++){
+//                     image2[x][y] = image[i][j];
+//                     y++;
+//                 }
+//                 x++;
+//             }
+//         }
+//         else {
+//             cout << "\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
+//             k--;
+//         }
+//     }
 
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++)
-            image[i][j] = image2[i][j];
-    }
+//     for (int i = 0; i < SIZE; i++) {
+//         for (int j = 0; j < SIZE; j++)
+//             image[i][j] = image2[i][j];
+//     }
 
-}
+// }
 
-// =========================================================================
+// // =========================================================================
 
-void shrink_h(float d){
+// void shrink_h(float d){
 
-    float step = SIZE/d;
+//     float step = SIZE/d;
 
-    for(int i=0; i<SIZE; i++){
-        float y=0;
-        for(int j=0; j<d; j++){
-            y+=step;
-            image2[i][j]=image[i][int(y)];
-        }
-    }
+//     for(int i=0; i<SIZE; i++){
+//         float y=0;
+//         for(int j=0; j<d; j++){
+//             y+=step;
+//             image2[i][j]=image[i][int(y)];
+//         }
+//     }
 
-}
+// }
 
-void skew_h(){
+// void skew_h(){
 
-    int b;
-    cout<<"Enter your angle: ";
-    cin>>b;
-    double a = tan((M_PI/180)*b);
-    float x = floor(256/ (1 + 1/a));
-    shrink_h(x);
+//     int b;
+//     cout<<"Enter your angle: ";
+//     cin>>b;
+//     double a = tan((M_PI/180)*b);
+//     float x = floor(256/ (1 + 1/a));
+//     shrink_h(x);
 
-    for(int i=0; i<SIZE; i++){
-        for(int j=0; j<SIZE; j++)image[i][j]=255;
-    }
+//     for(int i=0; i<SIZE; i++){
+//         for(int j=0; j<SIZE; j++)image[i][j]=255;
+//     }
 
-    double step = SIZE - x; double move = step/SIZE;
+//     double step = SIZE - x; double move = step/SIZE;
 
-    for(int i=0; i<SIZE; i++){
-        int ct = step + x, y=0;
-        for(int j=step; j<ct; ++j){
-            image[i][j]=image2[i][y];
-            y++;
-        }
-        step-=move;
-    }
+//     for(int i=0; i<SIZE; i++){
+//         int ct = step + x, y=0;
+//         for(int j=step; j<ct; ++j){
+//             image[i][j]=image2[i][y];
+//             y++;
+//         }
+//         step-=move;
+//     }
 
-}
+// }
 
-// =========================================================================
+// // =========================================================================
 
-void shrink_v(float d){
+// void shrink_v(float d){
 
-    float step = SIZE/d;
-    float y=0;
+//     float step = SIZE/d;
+//     float y=0;
 
-    for(int i=0; i<d; i++){
-        y+=step;
-        for(int j=0; j<SIZE; j++){
-            image2[i][j]=image[int(y)][j];
-        }
-    }
+//     for(int i=0; i<d; i++){
+//         y+=step;
+//         for(int j=0; j<SIZE; j++){
+//             image2[i][j]=image[int(y)][j];
+//         }
+//     }
 
-}
+// }
 
-void skew_v(){
+// void skew_v(){
 
-    int b;
-    cout<<"Enter your angle: ";
-    cin>>b;
-    double a = tan((M_PI/180)*b);
-    float x = floor(256/ (1 + 1/a));
-    shrink_v(x);
+//     int b;
+//     cout<<"Enter your angle: ";
+//     cin>>b;
+//     double a = tan((M_PI/180)*b);
+//     float x = floor(256/ (1 + 1/a));
+//     shrink_v(x);
 
-    for(int i=0; i<SIZE; i++){
-        for(int j=0; j<SIZE; j++)image[i][j]=255;
-    }
+//     for(int i=0; i<SIZE; i++){
+//         for(int j=0; j<SIZE; j++)image[i][j]=255;
+//     }
 
-    double step = SIZE - x; double move = step/SIZE;
-    
-    for(int i=0; i<SIZE; i++){
-        int ct = step + x, y=0;
-        for(int j=step; j<ct; ++j){
-            image[j][i]=image2[y][i];
-            y++;
-        }
-        step-=move;
-    }
+//     double step = SIZE - x; double move = step/SIZE;
 
-}
+//     for(int i=0; i<SIZE; i++){
+//         int ct = step + x, y=0;
+//         for(int j=step; j<ct; ++j){
+//             image[j][i]=image2[y][i];
+//             y++;
+//         }
+//         step-=move;
+//     }
+
+// }
 
 // =========================================================================
 
@@ -692,7 +696,7 @@ void crop() {
 
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
-            for (int k = 0; k < 3; ++k) { // fill a temp. image the cropped photo
+            for (int k = 0; k < RGB; ++k) { // fill a temp. image the cropped photo
                 croppedImage[i][j][k] = image[x + i][y + j][k];
             }
         }
@@ -701,7 +705,7 @@ void crop() {
     // make original the image white
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            for (int k = 0; k < 3; ++k) {
+            for (int k = 0; k < RGB; ++k) {
                 image[i][j][k] = 255;
             }
         }
@@ -710,7 +714,7 @@ void crop() {
     // paste the temp. to our white image
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
-            for (int k = 0; k < 3; ++k) {
+            for (int k = 0; k < RGB; ++k) {
 
                 image[i + x][y + j][k] = croppedImage[i][j][k];
             }
