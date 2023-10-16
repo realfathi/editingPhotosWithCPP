@@ -518,9 +518,28 @@ void detect_edge() {
 
 void shuffle(){
     cout<<"Enter the order in numbers:\n";
+    int o[4], freq[5]={0};
+    for(int i=0; i<4; i++){
+        cin>>o[i];
+        if(o[i]>4 or o[i]<1)o[i]=-1;
+        else if(freq[o[i]])o[i]=0;
+        else freq[o[i]]++;
+    }
+    string q[]={"first", "second", "third", "fourth"};
+    for(int i=0; i<4; i++){
+        while(o[i]==-1 or !o[i]){
+            int x;
+            if(o[i])cout<<q[i]<<" number is wrong!\nEnter a number between 1 and 4: ";
+            else cout<<q[i]<<" number is repeated!\nEnter a number between 1 and 4: ";
+            cin>>x;
+            o[i]=x;
+            if(o[i]>4 or o[i]<1)o[i]=-1;
+            else if(freq[o[i]])o[i]=0;
+            else freq[o[i]]++;
+        }
+    }
     for(int k=0; k<4; ++k){
-        int o; cin>>o;
-        if(o == 1){
+        if(o[k] == 1){
             int x = 128 , y ;
             if(k == 0 or k == 1)
                 x=0;
@@ -535,7 +554,7 @@ void shuffle(){
                 x++;
             }
         }
-        else if(o==2){
+        else if(o[k]==2){
             int x = 128 , y ;
             if(k == 0 or k==1)
                 x=0;
@@ -550,7 +569,7 @@ void shuffle(){
                 x++;
             }
         }
-        else if(o == 3){
+        else if(o[k] == 3){
             int x = 128 , y ;
             if(k == 0 or k==1)
                 x=0;
@@ -565,7 +584,7 @@ void shuffle(){
                 x++;
             }
         }
-        else if(o == 4){
+        else if(o[k] == 4){
             int x = 128 , y ;
             if(k == 0 or k == 1)
                 x=0;
@@ -579,10 +598,6 @@ void shuffle(){
                 }
                 x++;
             }
-        }
-        else {
-            cout << "\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
-            k--;
         }
     }
 
