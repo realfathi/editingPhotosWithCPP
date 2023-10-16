@@ -484,8 +484,10 @@ void mirror(){
         }
     }
 
-    else
+    else{
         cout<<"\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
+        mirror();
+    }
 
 }
 
