@@ -261,7 +261,7 @@ void enlarge(){
         if(!(q&1)) b=128,nj=SIZE;
         if(q>2 and q<5) a=128,ni=SIZE;
         if(4<q or q<1){
-            cout<<"Wrong number!\n Enter a number between 1 and 4!\n";
+            cout<<"Wrong number!\nEnter a number between 1 and 4: ";
             enlarge();
         }
         for (int i=a; i < ni; i++) {
