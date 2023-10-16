@@ -501,7 +501,7 @@ void detect_edge() {
                 I did it like the website dr.ramly gave us (edges are colored)
                 */
 
-                if ((abs(image[i][j]) - abs(image[i][j + 1])) >= 32 || (abs(image[i][j]) - abs(image[i + 1][j])) >= 30)
+                if ((abs(image[i][j]) - abs(image[i][j + 1])) >= 25 || (abs(image[i][j]) - abs(image[i + 1][j])) >= 25)
                     image[i][j] = 0;
                 else
                     image[i][j] = 255;
