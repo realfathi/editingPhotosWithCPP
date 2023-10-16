@@ -624,11 +624,18 @@ void shrink_h(float d){
 
 }
 
+int cnt=0;
 void skew_h(){
-
     int b;
-    cout<<"Enter your angle: ";
+    if(!cnt)cout<<"Enter your angle: ";
     cin>>b;
+    if(b<0 or b>90){
+        cout<<"Wrong number!\nEnter an angle between 0 and 90: ";
+        cnt++;
+        skew_h();
+    }
+    else {
+    cnt=0;
     double a = tan((M_PI/180)*b);
     float x = floor(256/ (1 + 1/a));
     shrink_h(x);
@@ -647,9 +654,9 @@ void skew_h(){
         }
         step-=move;
     }
+    }
 
 }
-
 // =========================================================================
 
 void shrink_v(float d){
@@ -667,10 +674,16 @@ void shrink_v(float d){
 }
 
 void skew_v(){
-
     int b;
-    cout<<"Enter your angle: ";
+    if(!cnt)cout<<"Enter your angle: ";
     cin>>b;
+    if(b<0 or b>90){
+        cout<<"Wrong number!\nEnter an angle between 0 and 90: ";
+        cnt++;
+        skew_v();
+    }
+    else {
+    cnt=0;
     double a = tan((M_PI/180)*b);
     float x = floor(256/ (1 + 1/a));
     shrink_v(x);
@@ -688,6 +701,7 @@ void skew_v(){
             y++;
         }
         step-=move;
+    }
     }
 
 }
