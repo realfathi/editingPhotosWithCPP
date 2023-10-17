@@ -713,7 +713,10 @@ void crop() {
     cout << "Enter x ,y ,width ,height:";
     int x, y, width, height;
     cin >> x >> y >> width >> height;
-
+    if (x < 0 || y < 0 || width <= 0 || height <= 0 || x + width > SIZE || y + height > SIZE) {
+    cout << "Invalid coordinates or dimensions." <<"\n";
+        return;
+    }
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) { // fill a temp. image the cropped photo
             croppedImage[i][j] = image[x + i][y + j];
