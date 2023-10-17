@@ -768,12 +768,13 @@ void crop() {
     cout << "Enter x ,y ,width ,height:";
     int x, y, width, height;
     cin >> x >> y >> width >> height;
+    cin >> x >> y >> width >> height;
     if (x < 0 || y < 0 || width <= 0 || height <= 0 || x + width > SIZE || y + height > SIZE) {
-        cout << "Invalid coordinates or dimensions." <<"\n";
+        cout << "Invalid coordinates or dimensions! Try not crop more than the actual size of the image." <<"\n";
         return;
     }
-    for (int i = 0; i < width; i++) {
-        for (int j = 0; j < height; j++) {
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
             for (int k = 0; k < RGB; ++k) { // fill a temp. image the cropped photo
                 croppedImage[i][j][k] = image[x + i][y + j][k];
             }
@@ -790,8 +791,8 @@ void crop() {
     }
     
     // paste the temp. to our white image
-    for (int i = 0; i < width; i++) {
-        for (int j = 0; j < height; j++) {
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
             for (int k = 0; k < RGB; ++k) {
 
                 image[i + x][y + j][k] = croppedImage[i][j][k];
