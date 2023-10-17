@@ -712,12 +712,11 @@ void crop() {
 
     cout << "Enter x ,y ,width ,height:";
     int x, y, width, height;
-    cin >> x >> y >> width >> height;
-
         int na = -1 ;
         // this loop check your choice is exist or not
         // if not chooce again
         while (na == -1 ){
+            cin >> x >> y >> width >> height;
             if (x < 0 || y < 0 || width <= 0 || height <= 0 || x + width > SIZE || y + height > SIZE) {
                 cout<< "Invalid coordinates or dimensions! Try not crop more than the actual size of the image, Please TRY Again  *_*\n\n";
             na=-1;
