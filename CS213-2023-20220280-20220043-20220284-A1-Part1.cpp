@@ -714,7 +714,7 @@ void crop() {
     int x, y, width, height;
     cin >> x >> y >> width >> height;
     if (x < 0 || y < 0 || width <= 0 || height <= 0 || x + width > SIZE || y + height > SIZE) {
-    cout << "Invalid coordinates or dimensions." <<"\n";
+    cout << "Invalid coordinates or dimensions! Try not crop more than the actual size of the image." <<"\n";
         return;
     }
     for (int i = 0; i < height; i++) {
