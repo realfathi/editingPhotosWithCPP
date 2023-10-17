@@ -496,7 +496,7 @@ void mirror(){
 void detect_edge() {
 
     for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) { 
+        for (int j = 0; j < SIZE; j++) {
 
                 /*see the average between every upper pixel or every side pexel if bigger
                 than 32 (as gradient(light and dark)) make it black and other white
@@ -717,8 +717,8 @@ void crop() {
     cout << "Invalid coordinates or dimensions." <<"\n";
         return;
     }
-    for (int i = 0; i < width; i++) {
-        for (int j = 0; j < height; j++) { // fill a temp. image the cropped photo
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) { // fill a temp. image the cropped photo
             croppedImage[i][j] = image[x + i][y + j];
         }
     } 
@@ -731,8 +731,8 @@ void crop() {
     }
     
     // paste the temp. to our white image
-    for (int i = 0; i < width; i++) {
-        for (int j = 0; j < height; j++) {
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
             image[i + x][y + j] = croppedImage[i][j];
         }
     }
