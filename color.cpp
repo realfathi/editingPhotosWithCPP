@@ -767,38 +767,44 @@ void crop() {
 
     cout << "Enter x ,y ,width ,height:";
     int x, y, width, height;
-    cin >> x >> y >> width >> height;
-    cin >> x >> y >> width >> height;
-    if (x < 0 || y < 0 || width <= 0 || height <= 0 || x + width > SIZE || y + height > SIZE) {
-        cout << "Invalid coordinates or dimensions! Try not crop more than the actual size of the image." <<"\n";
-        return;
-    }
-    for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
-            for (int k = 0; k < RGB; ++k) { // fill a temp. image the cropped photo
-                croppedImage[i][j][k] = image[x + i][y + j][k];
-            }
-        }
-    } 
+    int na = -1 ;
+    // this loop check your choice is exist or not
+    // if not chooce again
+    while (na == -1 ){
+        cin >> x >> y >> width >> height;
+        if (x < 0 || y < 0 || width <= 0 || height <= 0 || x + width > SIZE || y + height > SIZE) {
+            cout<< "Invalid coordinates or dimensions! Try not crop more than the actual size of the image, Please TRY Again  *_*\n\n";
+            na=-1;
+        }else{na=10;
+            for (int i = 0; i < SIZE; i++) {
+                for (int j = 0; j <SIZE; j++) {
+                    for (int k = 0; k < RGB; ++k) {
+                    // fill a temp. image the cropped photo
+                    croppedImage[i][j][k] = image[i][j][k];
+                }
+            }}
 
-    // make original the image white
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            for (int k = 0; k < RGB; ++k) {
-                image[i][j][k] = 255;
-            }
-        }
-    }
-    
-    // paste the temp. to our white image
-    for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
-            for (int k = 0; k < RGB; ++k) {
+            // make original the image white
+            for (int i = 0; i < SIZE; i++) {
+                for (int j = 0; j < SIZE; j++) {
+                    for (int k = 0; k <RGB ; ++k) {
 
-                image[i + x][y + j][k] = croppedImage[i][j][k];
+                    image[i][j][k] = 255;
+                }
+            }}
+
+            // paste the temp. to our white image
+            for (int j = y; j < y + height; j++) {
+                for (int i = x; i < x + width; i++) {
+                    for (int k = 0; k < RGB; ++k) {
+                    image[j][i][k] = croppedImage[j][i][k];
+                }
             }
-        }
+        }}
+
+
     }
+
     
 
 }
