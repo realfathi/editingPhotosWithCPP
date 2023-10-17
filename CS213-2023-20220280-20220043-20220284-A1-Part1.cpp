@@ -721,9 +721,9 @@ void crop() {
                 cout<< "Invalid coordinates or dimensions! Try not crop more than the actual size of the image, Please TRY Again  *_*\n\n";
             na=-1;
             }else{na=10;
-                for (int i = 0; i < height; i++) {
-                    for (int j = 0; j < width; j++) { // fill a temp. image the cropped photo
-                        croppedImage[i][j] = image[x + i][y + j];
+                for (int i = 0; i < SIZE; i++) {
+                    for (int j = 0; j <SIZE; j++) { // fill a temp. image the cropped photo
+                        croppedImage[i][j] = image[i][j];
                     }
                 }
 
@@ -735,9 +735,9 @@ void crop() {
                 }
 
                 // paste the temp. to our white image
-                for (int i = 0; i < height; i++) {
-                    for (int j = 0; j < width; j++) {
-                        image[i + x][y + j] = croppedImage[i][j];
+                    for (int j = y; j < y + height; j++) {
+                        for (int i = x; i < x + width; i++) {
+                        image[j][i] = croppedImage[j][i];
                     }
                 }
             }
