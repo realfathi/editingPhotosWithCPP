@@ -713,30 +713,39 @@ void crop() {
     cout << "Enter x ,y ,width ,height:";
     int x, y, width, height;
     cin >> x >> y >> width >> height;
-    if (x < 0 || y < 0 || width <= 0 || height <= 0 || x + width > SIZE || y + height > SIZE) {
-    cout << "Invalid coordinates or dimensions! Try not crop more than the actual size of the image." <<"\n";
-        return;
-    }
-    for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) { // fill a temp. image the cropped photo
-            croppedImage[i][j] = image[x + i][y + j];
-        }
-    } 
 
-    // make original the image white
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            image[i][j] = 255;
-        }
+        int na = -1 ;
+        // this loop check your choice is exist or not
+        // if not chooce again
+        while (na == -1 ){
+            if (x < 0 || y < 0 || width <= 0 || height <= 0 || x + width > SIZE || y + height > SIZE) {
+                cout<< "Invalid coordinates or dimensions! Try not crop more than the actual size of the image, Please TRY Again  *_*\n\n";
+            na=-1;
+            }else{na=10;
+                for (int i = 0; i < height; i++) {
+                    for (int j = 0; j < width; j++) { // fill a temp. image the cropped photo
+                        croppedImage[i][j] = image[x + i][y + j];
+                    }
+                }
+
+                // make original the image white
+                for (int i = 0; i < SIZE; i++) {
+                    for (int j = 0; j < SIZE; j++) {
+                        image[i][j] = 255;
+                    }
+                }
+
+                // paste the temp. to our white image
+                for (int i = 0; i < height; i++) {
+                    for (int j = 0; j < width; j++) {
+                        image[i + x][y + j] = croppedImage[i][j];
+                    }
+                }
+            }
+
+
     }
-    
-    // paste the temp. to our white image
-    for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
-            image[i + x][y + j] = croppedImage[i][j];
-        }
-    }
-    
+
 }
 
 // =========================================================================
