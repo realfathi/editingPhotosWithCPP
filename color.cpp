@@ -511,7 +511,7 @@ void detect_edge() {
         for (int j = 0; j < SIZE; j++) {
             for (int k = 0; k < RGB ; ++k) {
 
-                /*see the average between every upper pixel or every side pexel if bigger
+                /*see the average between every upper pixel or every side pixel if bigger
                 than 32 (as gradient(light and dark)) make it black and other white
                 I did it like the website dr.ramly gave us (edges are colored)
                 */
@@ -685,7 +685,7 @@ void skew_h(){
     }
     else {
     cnt=0;
-    double a = tan((M_PI/180)*b);
+    double a = tan((M_PI/180)*(90-b));
     float x = floor(256/ (1 + 1/a));
     shrink_h(x);
 
@@ -735,7 +735,7 @@ void skew_v(){
     }
     else {
     cnt=0;
-    double a = tan((M_PI/180)*b);
+    double a = tan((M_PI/180)*(90-b));
     float x = floor(256/ (1 + 1/a));
     shrink_v(x);
 
