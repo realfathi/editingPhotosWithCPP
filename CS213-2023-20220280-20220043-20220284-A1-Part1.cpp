@@ -636,7 +636,7 @@ void skew_h(){
     }
     else {
     cnt=0;
-    double a = tan((M_PI/180)*b);
+    double a = tan((M_PI/180)*(90-b));
     float x = floor(256/ (1 + 1/a));
     shrink_h(x);
 
@@ -684,7 +684,7 @@ void skew_v(){
     }
     else {
     cnt=0;
-    double a = tan((M_PI/180)*b);
+    double a = tan((M_PI/180)*(90-b));
     float x = floor(256/ (1 + 1/a));
     shrink_v(x);
 
