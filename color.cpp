@@ -546,7 +546,7 @@ void detect_edge() {
             for (int i = 0; i < SIZE; i++) {
                 for (int j = 0; j < SIZE; j++) {
                     for (int k = 0; k < RGB; ++k) { 
-                    /*see the average between every upper pixel or every side pexel if bigger
+                    /*see the average between every upper pixel or every side pixel if bigger
                     than 32 (as gradient(light and dark)) make it black and other white
                     I did it like the website dr.ramly gave us (edges are colored)
                     */
@@ -604,12 +604,12 @@ void shuffle(){
     for(int i = 0; i < 4 ; i++){
         cin >> o[i] ;
 
-        if(o[i] > 4 || o[i] < 1)
+        if(o[i] > 4 || o[i] < 1)//checking if the order is valid or not
             o[i]=-1;
-        else if(freq[o[i]])
+        else if(freq[o[i]])//checking if the number is repeated
             o[i]=0;
         else 
-            freq[o[i]]++;
+            freq[o[i]]++;//counting the appearances of each number
 
     }
 
@@ -635,6 +635,7 @@ void shuffle(){
     }
 
     for(int k = 0; k < 4; ++k){
+      //correcting the the invalid numbers
         if(o[k] == 1){
             int x = 128 , y ;
             if(k == 0 or k == 1)
@@ -708,13 +709,13 @@ void shuffle(){
         }
     }
     }
-
+//I apologize for the complexity of this code.
 }
 
 // =========================================================================
 
 void shrink_h(float d){
-    float step = SIZE/d;
+    float step = SIZE/d;//number of pixels to skip to get the shrunk image
     for(int i=0; i<SIZE; i++){
         float y=0;
         for(int j=0; j<d; j++){
@@ -738,16 +739,16 @@ void skew_h(){
     else {
     cnt=0;
     double a = tan((M_PI/180)*(90-b));
-    float x = floor(256/ (1 + 1/a));
+    float x = floor(256/ (1 + 1/a));//calculating the base of the new image
     shrink_h(x);
 
     for(int i=0; i<SIZE; i++){
         for(int j=0; j<SIZE; j++){
             for(int k=0; k<RGB; k++)
-            image[i][j][k]=255;
+            image[i][j][k]=255;//whitening the image
         }
     }
-
+//step is the location of the first pixel
     double step = SIZE - x; double move = step/SIZE;
 
     for(int i=0; i<SIZE; i++){
@@ -766,7 +767,7 @@ void skew_h(){
 // =========================================================================
 
 void shrink_v(float d){
-    float step = SIZE/d;
+    float step = SIZE/d;//number of pixels to skip to get the shrunk image
     float y = 0;
     for(int i=0; i < d ; i++){
         y += step ;
@@ -790,16 +791,16 @@ void skew_v(){
     else {
         cnt = 0 ;
         double a = tan((M_PI/180)*(90-b));
-        float x = floor(256/ (1 + 1/a));
+        float x = floor(256/ (1 + 1/a));//calculating the base of the new image
         shrink_v(x) ;
 
         for(int i=0; i<SIZE; i++){
             for(int j=0; j<SIZE; j++){
                 for(int k=0; k<RGB; k++)
-                image[i][j][k] = 255 ;
+                image[i][j][k] = 255 ;//whitening the image
             }
         }
-
+//step is the location of the first pixel
         double step = SIZE - x; 
         double move = step/SIZE;
 
@@ -823,12 +824,12 @@ void crop() {
     cout << "Enter x ,y ,width ,height:";
     int x, y, width, height;
     int na = -1 ;
-    // this loop check your choice is exist or not
-    // if not chooce again
+    //This loop checks whether your choice exists or not
+    // If not choose again
     while (na == -1 ){
         cin >> x >> y >> width >> height;
         if (x < 0 || y < 0 || width <= 0 || height <= 0 || x + width > SIZE || y + height > SIZE) {
-            cout<< "Invalid coordinates or dimensions! Try not crop more than the actual size of the image, Please TRY Again  *_*\n\n";
+            cout<< "Invalid coordinates or dimensions! Try not to crop more than the actual size of the image, Please TRY Again  *_*\n\n";
             na=-1;
         }
 
@@ -989,11 +990,11 @@ void doSomethingForImage() {
 
             case 's':
                 saveImage ();
-                loaded = false ; /* this if you save photo ,
-                                you able to loead new photo again if you select filter */
+                loaded = false ; /* this if you save photo,
+                                you are able to load a new photo again if you select filter */
                 break;
 
-            default : // close the program if you choice zero
+            default : // close the program if you choose zero
                 return ;
         }
     }
