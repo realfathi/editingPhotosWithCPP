@@ -396,7 +396,7 @@ void shrink_image(){
         cout << "Enter a number to select dimension of shrink the image: ";
         cin >> n9 ;
       
-        // to make image background is wihte 
+        // to make image background is white
         for(int i = 0 ; i < SIZE ; i++){
             for(int j = 0 ; j < SIZE ; j++){
                 for (int k = 0 ; k < RGB ; k++){
@@ -506,26 +506,62 @@ void mirror(){
 // =========================================================================
 
 void detect_edge() {
+    int de = -1;
+    while (de == -1) {
+        cout << "1:black&white\n2:colored\n";
+        cout << "Enter a number to select:\n";
+        cin >> de;
+        if (de == 1) {
+            unsigned char temp[SIZE][SIZE][RGB];
+            black_white();
+                        for (int i = 0; i < SIZE; i++) {
+                            for (int j = 0; j < SIZE; j++) {
+                                for (int l = 0; l < RGB; ++l) {
+                                    temp[i][j][l] = 255;
+                                }
+                            }
+                        }
+                        for (int i = 0; i < SIZE; i++) {
+                            for (int j = 0; j < SIZE; j++) {
+                                for (int l = 0; l < RGB; ++l) {
+                                    int v = image[i][j][l];
+                                    if ((v ^ image[i][j + 1][l]) or (v ^ image[i + 1][j][l]))
+                                        temp[i][j][l] = 0;
+                                    if ((v ^ image[i][j - 1][l]) or (v ^ image[i - 1][j][l]))
+                                        temp[i][j][l] = 0;
+                                }
+                            }
+                        }
+                        for (int i = 0; i < SIZE; i++) {
+                            for (int j = 0; j < SIZE; j++) {
+                                for (int l = 0; l < RGB; ++l) {
+                                    image[i][j][l] = temp[i][j][l];
+                                }
+                            }
+                        }
 
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
-            for (int k = 0; k < RGB ; ++k) {
+                    }
+        else if (de == 2) {
+            for (int i = 0; i < SIZE; i++) {
+                for (int j = 0; j < SIZE; j++) {
+                    for (int k = 0; k < RGB; ++k) {                    /*see the average between every upper pixel or every side pexel if bigger
+                    than 32 (as gradient(light and dark)) make it black and other white
+                    I did it like the website dr.ramly gave us (edges are colored)
+                    */
+                        if ((abs(image[i][j][k]) - abs(image[i][j + 1][k])) >= 32 ||
+                            (abs(image[i][j][k]) - abs(image[i + 1][j][k])) >= 30)
+                            image[i][j][k] = 0;
+                        else
+                            image[i][j][k] = 255;
 
-                /*see the average between every upper pixel or every side pixel if bigger
-                than 32 (as gradient(light and dark)) make it black and other white
-                I did it like the website dr.ramly gave us (edges are colored)
-                */
-
-                if ((abs(image[i][j][k]) - abs(image[i][j + 1][k])) >= 32 || (abs(image[i][j][k]) - abs(image[i + 1][j][k])) >= 30)
-                    image[i][j][k] = 0;
-                else
-                    image[i][j][k] = 255;
-
+                    }
+                }}}
+            else {
+                cout << "\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
+                de= -1; // loop keep working
             }
         }
     }
-
-}
 // =========================================================================
 void enlarge(){
         cout<<"Pick a quarter to enlarge: ";
