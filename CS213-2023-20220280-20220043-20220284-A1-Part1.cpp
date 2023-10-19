@@ -670,7 +670,7 @@ void skew_h(){
     for(int i=0; i<SIZE; i++){
         for(int j=0; j<SIZE; j++)image[i][j]=255;//whitening the image
     }
-
+//step is the location of the first pixel
     double step = SIZE - x; double move = step/SIZE;
 
     for(int i=0; i<SIZE; i++){
@@ -720,7 +720,7 @@ void skew_v(){
         for(int i=0; i<SIZE; i++){
             for(int j=0; j<SIZE; j++)image[i][j]=255;//whitening the image
     }
-
+//step is the location of the first pixel
         double step = SIZE - x; double move = step/SIZE;
 
         for(int i=0; i<SIZE; i++){
