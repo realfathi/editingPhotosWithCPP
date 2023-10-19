@@ -30,11 +30,10 @@ void loadImage ();
 void saveImage ();
 void doSomethingForImage ();
 // =================================
-void menu();
 void rotate_180 ();
 void rotate_90 ();
 void rotate_270();
-void negative();
+void invert();
 void black_white();
 void flip();
 void darken();
