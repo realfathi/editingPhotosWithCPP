@@ -261,13 +261,13 @@ void enlarge(){
   /*initially i and j equal zero and loop ends at 128*/
         int x=0, a=0, b=0, ni=128, nj=128, q;
         cin>>q;
-  /*if the input is even then j starts from 128 if odd it starts from 0  */ 
-        if(!(q&1)) b=128,nj=SIZE;
-        if(q>2 and q<5) a=128,ni=SIZE;
+  //checking if the input is valid
         while(4<q or q<1){
             cout<<"Wrong number!\nEnter a number between 1 and 4: ";
             cin>>q;
         }
+        if(!(q&1)) b=128,nj=SIZE; /*if the input is even then j starts from 128 if odd it starts from 0  */
+        if(q>2 and q<5) a=128,ni=SIZE;
 /*enlarging a quarter of the image by repeating each pixel 4 times in the new image*/
         for (int i=a; i < ni; i++) {
             int y=0;
