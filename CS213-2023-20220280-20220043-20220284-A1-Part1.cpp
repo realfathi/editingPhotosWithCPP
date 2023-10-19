@@ -394,7 +394,14 @@ void blur_image(){
 void shrink_image(){
     int shrink[SIZE][SIZE] 
     ; // Create a shrink array to store blurred image data
-
+  
+    // to make image background is white 
+        for(int i = 0 ; i < SIZE ; i++){
+            for(int j = 0 ; j < SIZE ; j++){
+                    shrink[i][j] = image[i][j] ;
+                    image[i][j] = 255 ;
+            }
+        }
     int n9 = -1 ; 
     while (n9 == -1){
         cout << "shrink the image dimensions to: \n";
@@ -402,14 +409,6 @@ void shrink_image(){
         cout << "Enter a number to select dimension of shrink the image: ";
         cin >> n9 ;
       
-        // to make image background is white 
-        for(int i = 0 ; i < SIZE ; i++){
-            for(int j = 0 ; j < SIZE ; j++){
-                    shrink[i][j] = image[i][j] ;
-                    image[i][j] = 255 ;
-            }
-        }
-
         // Iterate through by half size to shrink by half
         if (n9 == 1 ){
             for(int i = 0 ; i < SIZE /2; i++){
