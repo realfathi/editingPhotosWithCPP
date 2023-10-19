@@ -181,8 +181,8 @@ void black_white(){
 void flip(){
 
     int n4 = -1 ;
-    // this loop check your choice is exist or not 
-    // if not chooce again
+    //This loop checks whether your choice exists or not 
+    //If not choose again
     while (n4 == -1 ){
         cout<<"1:vertically\n2:horizontally\n";
         cout<<"Enter a number to select horizontally or vertically: ";
@@ -219,7 +219,7 @@ void flip(){
 void darken(){
 
     // make the image darken by 50% 
-    // by division vaule of pixel by 2 
+    // by division value of pixel by 2 
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             image[i][j] /= 2 ;
@@ -402,7 +402,7 @@ void shrink_image(){
         cout << "Enter a number to select dimension of shrink the image: ";
         cin >> n9 ;
       
-        // to make image background is wihte 
+        // to make image background is white 
         for(int i = 0 ; i < SIZE ; i++){
             for(int j = 0 ; j < SIZE ; j++){
                     shrink[i][j] = image[i][j] ;
@@ -640,7 +640,7 @@ void shuffle(){
 
 void shrink_h(float d){
 
-    float step = SIZE/d;//number of pixels to skip to get the shrinked image
+    float step = SIZE/d;//number of pixels to skip to get the shrunk image
 
     for(int i=0; i<SIZE; i++){
         float y=0;
@@ -689,7 +689,7 @@ void skew_h(){
 
 void shrink_v(float d){
 
-    float step = SIZE/d ;//number of pixels to skip to get the shrinked image
+    float step = SIZE/d ;//number of pixels to skip to get the shrunk image
     float y = 0 ;
 
     for(int i=0; i<d; i++){
@@ -743,8 +743,8 @@ void crop() {
     cout << "Enter x ,y ,width ,height:";
     int x, y, width, height;
         int na = -1 ;
-        // this loop check your choice is exist or not
-        // if not chooce again
+        //This loop checks whether your choice exists or not
+        //If not choose again
         while (na == -1 ){
             cin >> x >> y >> width >> height;
             if (x < 0 || y < 0 || width <= 0 || height <= 0 || x + width > SIZE || y + height > SIZE) {
@@ -842,7 +842,7 @@ void doSomethingForImage() {
             case '8':
                 if (loaded == false)
                     loadImage ();
-                // enlarge();
+                 enlarge();
                 loaded = true ;
                 break;
 
@@ -897,11 +897,11 @@ void doSomethingForImage() {
 
             case 's':
                 saveImage ();
-                loaded = false ; /* this if you save photo ,
-                                you able to loead new photo again if you select filter */
+                loaded = false ; /* this if you save the photo,
+                                you are able to load a new photo again if you select filter */
                 break;
 
-            default : // close the program if you choice zero
+            default : // close the program if you choose zero
                 return ;
         }
     }
