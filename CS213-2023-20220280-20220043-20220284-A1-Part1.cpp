@@ -504,18 +504,25 @@ void mirror(){
 
 void detect_edge() {
 
+    black_white();
+    unsigned char temp[SIZE][SIZE];
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++){
+            temp[i][j]=255;
+        }
+    }
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-
-                /*see the average between every upper pixel or every side pexel if bigger
-                than 32 (as gradient(light and dark)) make it black and other white
-                I did it like the website dr.ramly gave us (edges are colored)
-                */
-
-                if ((abs(image[i][j]) - abs(image[i][j + 1])) >= 25 || (abs(image[i][j]) - abs(image[i + 1][j])) >= 25)
-                    image[i][j] = 0;
-                else
-                    image[i][j] = 255;
+                int v= image[i][j];
+                if ((v^image[i][j + 1]) or (v^image[i + 1][j]))
+                    temp[i][j] = 0;
+                if((v^image[i][j - 1]) or (v^image[i - 1][j]))
+                    temp[i][j]=0;
+        }   
+    }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++){
+            image[i][j]=temp[i][j];
         }
     }
 
@@ -531,17 +538,18 @@ void shuffle(){
 
     for(int i = 0; i < 4 ; i++){
         cin >> o[i];
-        if(o[i] > 4 || o[i] < 1)
+        if(o[i] > 4 || o[i] < 1)//checking if the order is valid or not
             o[i] = -1 ;
-        else if( freq[o[i]] ) 
+        else if( freq[o[i]] )//checking if the number is repeated
             o[i] = 0 ;
         else 
-            freq[o[i]]++;
+            freq[o[i]]++;//counting the appearances of each number
     }
 
     string q[] = {"first", "second", "third", "fourth"};
 
     for(int i = 0; i < 4; i++){
+      //correcting the the invalid numbers
         while(o[i] == -1 || !o[i] ){
             int x;
             if(o[i])
@@ -559,15 +567,14 @@ void shuffle(){
         }
     }
 
-    for(int k = 0; k < 4; ++k){
-
+    for(int k=0; k<4; ++k){
         if(o[k] == 1){
             int x = 128 , y ;
-            if(k == 0 or k == 1)
+            if(k< 2)
                 x=0;
             for (int i = 0; i < SIZE/2; i++){
                 y=0;
-                if(k == 1 or k == 3)
+                if(k&1)
                     y=128;
                 for (int j =0; j<SIZE/2; j++){
                     image2[x][y] = image[i][j];
@@ -576,14 +583,13 @@ void shuffle(){
                 x++;
             }
         }
-
-        else if(o[k] == 2){
+        else if(o[k]==2){
             int x = 128 , y ;
-            if(k == 0 or k==1)
+            if(k<2)
                 x=0;
             for (int i = 0; i < SIZE/2; i++) {
                 y=0;
-                if(k==1 or k==3)
+                if(k&1)
                     y=128;
                 for (int j = SIZE/2; j<SIZE; j++){
                     image2[x][y] = image[i][j];
@@ -594,11 +600,11 @@ void shuffle(){
         }
         else if(o[k] == 3){
             int x = 128 , y ;
-            if(k == 0 or k==1)
+            if(k<2)
                 x=0;
             for (int i = SIZE/2; i < SIZE; i++) {
                 y=0;
-                if(k == 1 or k == 3)
+                if(k&1)
                     y=128;
                 for (int j = 0; j<SIZE/2; j++){
                     image2[x][y] = image[i][j];
@@ -609,11 +615,11 @@ void shuffle(){
         }
         else if(o[k] == 4){
             int x = 128 , y ;
-            if(k == 0 or k == 1)
+            if(k<2)
                 x=0;
             for (int i = SIZE/2; i < SIZE; i++) {
                 y=0;
-                if(k == 1 or k == 3)
+                if(k&1)
                     y=128;
                 for (int j = SIZE/2 ; j<SIZE; j++){
                     image2[x][y] = image[i][j];
@@ -628,14 +634,14 @@ void shuffle(){
         for (int j = 0; j < SIZE; j++)
             image[i][j] = image2[i][j];
     }
-
+//I apologize for the complexity of this code.
 }
 
 // =========================================================================
 
 void shrink_h(float d){
 
-    float step = SIZE/d;
+    float step = SIZE/d;//number of pixels to skip to get the shrinked image
 
     for(int i=0; i<SIZE; i++){
         float y=0;
@@ -660,11 +666,11 @@ void skew_h(){
     else {
     cnt=0;
     double a = tan((M_PI/180)*(90-b));
-    float x = floor(256/ (1 + 1/a));
+    float x = floor(256/ (1 + 1/a));//calculating the base of the new image
     shrink_h(x);
 
     for(int i=0; i<SIZE; i++){
-        for(int j=0; j<SIZE; j++)image[i][j]=255;
+        for(int j=0; j<SIZE; j++)image[i][j]=255;//whitening the image
     }
 
     double step = SIZE - x; double move = step/SIZE;
@@ -684,7 +690,7 @@ void skew_h(){
 
 void shrink_v(float d){
 
-    float step = SIZE/d ;
+    float step = SIZE/d ;//number of pixels to skip to get the shrinked image
     float y = 0 ;
 
     for(int i=0; i<d; i++){
@@ -702,7 +708,7 @@ void skew_v(){
     if(!cnt)
         cout<<"Enter your angle: ";
     cin >> b;
-    if(b < 0 || b > 90){
+    if(b < 0 or b > 90){
         cout<<"Wrong number!\nEnter an angle between 0 and 90: ";
         cnt++;
         skew_v();
@@ -710,11 +716,11 @@ void skew_v(){
     else {
         cnt=0;
         double a = tan((M_PI/180)*(90-b));
-        float x = floor(256/ (1 + 1/a));
+        float x = floor(256/ (1 + 1/a));//calculating the base of the new image
         shrink_v(x);
 
         for(int i=0; i<SIZE; i++){
-            for(int j=0; j<SIZE; j++)image[i][j]=255;
+            for(int j=0; j<SIZE; j++)image[i][j]=255;//whitening the image
     }
 
         double step = SIZE - x; double move = step/SIZE;
