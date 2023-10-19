@@ -264,9 +264,9 @@ void enlarge(){
   /*if the input is even then j starts from 128 if odd it starts from 0  */ 
         if(!(q&1)) b=128,nj=SIZE;
         if(q>2 and q<5) a=128,ni=SIZE;
-        if(4<q or q<1){
+        while(4<q or q<1){
             cout<<"Wrong number!\nEnter a number between 1 and 4: ";
-            enlarge();
+            cin>>q;
         }
 /*enlarging a quarter of the image by repeating each pixel 4 times in the new image*/
         for (int i=a; i < ni; i++) {
