@@ -1,7 +1,7 @@
 /*
                                             Assignment 1 - OOP
-  
-Date: 15 October 2023
+                                                   Part 2 - (FULL)
+Date: 18 October 2023
 Purpose: Demonstrate use of bmplip for handling  / load a color image and store in another file
 Supervised by Dr.Mohammad El-Ramly
 
@@ -396,7 +396,7 @@ void shrink_image(){
         cout << "Enter a number to select dimension of shrink the image: ";
         cin >> n9 ;
       
-        // to make image background is white
+        // Iterate through by half size to shrink by half
         for(int i = 0 ; i < SIZE ; i++){
             for(int j = 0 ; j < SIZE ; j++){
                 for (int k = 0 ; k < RGB ; k++){
@@ -416,7 +416,7 @@ void shrink_image(){
             }
             return ;
         }
-        // second condition
+        // Iterate through by a third of size to shrink by half
         else if (n9 == 2 ){
             for(int i = 0 ; i < SIZE /3; i++){
                 for(int j = 0 ; j < SIZE /3 ; j++){
@@ -426,7 +426,7 @@ void shrink_image(){
             }
             return ;
         }
-        // third condition
+        // Iterate through by quarter of size to shrink by half
         else if (n9 == 3 ){
             for(int i = 0 ; i < SIZE /4; i++){
                 for(int j = 0 ; j < SIZE /4 ; j++){
@@ -438,7 +438,7 @@ void shrink_image(){
         }
         else{
             cout << "\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
-            n9 = -1 ; // loop keep working
+            n9 = -1 ; // loop keep working if selection is wrong
         }
     }
     
@@ -498,7 +498,7 @@ void mirror(){
 
     else{
         cout<<"\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
-        mirror();
+        mirror(); // function keep working if selection is wrong
     }
 
 }
@@ -525,9 +525,9 @@ void detect_edge() {
                             for (int j = 0; j < SIZE; j++) {
                                 for (int l = 0; l < RGB; ++l) {
                                     int v = image[i][j][l];
-                                    if ((v ^ image[i][j + 1][l]) or (v ^ image[i + 1][j][l]))
+                                    if ((v ^ image[i][j + 1][l]) || (v ^ image[i + 1][j][l]))
                                         temp[i][j][l] = 0;
-                                    if ((v ^ image[i][j - 1][l]) or (v ^ image[i - 1][j][l]))
+                                    if ((v ^ image[i][j - 1][l]) || (v ^ image[i - 1][j][l]))
                                         temp[i][j][l] = 0;
                                 }
                             }
@@ -544,7 +544,8 @@ void detect_edge() {
         else if (de == 2) {
             for (int i = 0; i < SIZE; i++) {
                 for (int j = 0; j < SIZE; j++) {
-                    for (int k = 0; k < RGB; ++k) {                    /*see the average between every upper pixel or every side pexel if bigger
+                    for (int k = 0; k < RGB; ++k) { 
+                    /*see the average between every upper pixel or every side pexel if bigger
                     than 32 (as gradient(light and dark)) make it black and other white
                     I did it like the website dr.ramly gave us (edges are colored)
                     */
@@ -598,27 +599,41 @@ void enlarge(){
 
 void shuffle(){
     cout<<"Enter the order in numbers:\n";
-    int o[4], freq[5]={0};
-    for(int i=0; i<4; i++){
-        cin>>o[i];
-        if(o[i]>4 or o[i]<1)o[i]=-1;
-        else if(freq[o[i]])o[i]=0;
-        else freq[o[i]]++;
+    int o[4], freq[5] = {0};
+    for(int i = 0; i < 4 ; i++){
+        cin >> o[i] ;
+
+        if(o[i] > 4 || o[i] < 1)
+            o[i]=-1;
+        else if(freq[o[i]])
+            o[i]=0;
+        else 
+            freq[o[i]]++;
+
     }
-    string q[]={"first", "second", "third", "fourth"};
-    for(int i=0; i<4; i++){
-        while(o[i]==-1 or !o[i]){
+
+    string q[] = {"first", "second", "third", "fourth"};
+
+    for(int i = 0; i < 4; i++){
+
+        while(o[i] == -1 || !o[i] ){
             int x;
-            if(o[i])cout<<q[i]<<" number is wrong!\nEnter a number between 1 and 4: ";
-            else cout<<q[i]<<" number is repeated!\nEnter a number between 1 and 4: ";
-            cin>>x;
-            o[i]=x;
-            if(o[i]>4 or o[i]<1)o[i]=-1;
-            else if(freq[o[i]])o[i]=0;
-            else freq[o[i]]++;
+            if(o[i])
+                cout << q[i] <<" number is wrong!\nEnter a number between 1 and 4: ";
+            else 
+                cout << q[i] <<" number is repeated!\nEnter a number between 1 and 4: ";
+            cin >> x;
+            o[i] = x;
+            if(o[i] > 4 || o[i] < 1)
+                o[i] = -1;
+            else if(freq[o[i]])
+                o[i] = 0;
+            else 
+                freq[o[i]]++;
         }
     }
-    for(int k=0; k<4; ++k){
+
+    for(int k = 0; k < 4; ++k){
         if(o[k] == 1){
             int x = 128 , y ;
             if(k == 0 or k == 1)
@@ -635,7 +650,7 @@ void shuffle(){
                 x++;
             }
         }
-        else if(o[k]==2){
+        else if(o[k] == 2){
             int x = 128 , y ;
             if(k == 0 or k==1)
                 x=0;
@@ -695,7 +710,7 @@ void shuffle(){
 
 }
 
-// // =========================================================================
+// =========================================================================
 
 void shrink_h(float d){
     float step = SIZE/d;
@@ -747,52 +762,55 @@ void skew_h(){
 
 }
 
-// // =========================================================================
+// =========================================================================
 
 void shrink_v(float d){
     float step = SIZE/d;
-    float y=0;
-    for(int i=0; i<d; i++){
-        y+=step;
-        for(int j=0; j<SIZE; j++){
-            for(int k=0; k<RGB; k++)
-            image2[i][j][k]=image[int(y)][j][k];
+    float y = 0;
+    for(int i=0; i < d ; i++){
+        y += step ;
+        for(int j = 0; j < SIZE ; j++){
+            for(int k = 0; k < RGB ; k++)
+            image2[i][j][k] = image[int(y)][j][k];
         }
     }
 }
+
 void skew_v(){
-    int b;
-    if(!cnt)cout<<"Enter your angle: ";
-    cin>>b;
-    if(b<0 or b>90){
+    int b ;
+    if(!cnt)
+        cout<<"Enter your angle: ";
+    cin >> b ;
+    if(b < 0 || b > 90){
         cout<<"Wrong number!\nEnter an angle between 0 and 90: ";
         cnt++;
         skew_v();
     }
     else {
-    cnt=0;
-    double a = tan((M_PI/180)*(90-b));
-    float x = floor(256/ (1 + 1/a));
-    shrink_v(x);
+        cnt = 0 ;
+        double a = tan((M_PI/180)*(90-b));
+        float x = floor(256/ (1 + 1/a));
+        shrink_v(x) ;
 
-    for(int i=0; i<SIZE; i++){
-        for(int j=0; j<SIZE; j++){
-            for(int k=0; k<RGB; k++)
-            image[i][j][k]=255;
+        for(int i=0; i<SIZE; i++){
+            for(int j=0; j<SIZE; j++){
+                for(int k=0; k<RGB; k++)
+                image[i][j][k] = 255 ;
+            }
         }
-    }
 
-    double step = SIZE - x; double move = step/SIZE;
+        double step = SIZE - x; 
+        double move = step/SIZE;
 
-    for(int i=0; i<SIZE; i++){
-        int ct = step + x, y=0;
-        for(int j=step; j<ct; ++j){
-            for(int k=0; k<RGB; k++)
-            image[j][i][k]=image2[y][i][k];
-            y++;
+        for(int i=0; i<SIZE; i++){
+            int ct = step + x , y = 0;
+            for(int j=step; j<ct; ++j){
+                for(int k=0; k<RGB; k++)
+                    image[j][i][k] = image2[y][i][k];
+                y++;
+                }
+            step -= move;
         }
-        step-=move;
-    }
     }
 
 }
@@ -811,14 +829,17 @@ void crop() {
         if (x < 0 || y < 0 || width <= 0 || height <= 0 || x + width > SIZE || y + height > SIZE) {
             cout<< "Invalid coordinates or dimensions! Try not crop more than the actual size of the image, Please TRY Again  *_*\n\n";
             na=-1;
-        }else{na=10;
+        }
+
+        else{na=10;
             for (int i = 0; i < SIZE; i++) {
                 for (int j = 0; j <SIZE; j++) {
                     for (int k = 0; k < RGB; ++k) {
                     // fill a temp. image the cropped photo
                     croppedImage[i][j][k] = image[i][j][k];
+                    }
                 }
-            }}
+            }
 
             // make original the image white
             for (int i = 0; i < SIZE; i++) {
@@ -826,17 +847,19 @@ void crop() {
                     for (int k = 0; k <RGB ; ++k) {
 
                     image[i][j][k] = 255;
+                    }
                 }
-            }}
+            }
 
             // paste the temp. to our white image
             for (int j = y; j < y + height; j++) {
                 for (int i = x; i < x + width; i++) {
                     for (int k = 0; k < RGB; ++k) {
                     image[j][i][k] = croppedImage[j][i][k];
+                    }
                 }
             }
-        }}
+        }
 
 
     }
@@ -965,6 +988,8 @@ void doSomethingForImage() {
 
             case 's':
                 saveImage ();
+                loaded = false ; /* this if you save photo ,
+                                you able to loead new photo again if you select filter */
                 break;
 
             default : // close the program if you choice zero
