@@ -29,6 +29,8 @@ char select ; // Global variable
 void loadImage ();
 void saveImage ();
 void doSomethingForImage ();
+// =================================
+void menu();
 void rotate_180 ();
 void rotate_90 ();
 void rotate_270();
@@ -218,6 +220,7 @@ void flip(){
 void darken(){
 
     // make the image darken by 50% 
+    // by division vaule of pixel by 2 
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             image[i][j] /= 2 ;
@@ -408,7 +411,7 @@ void shrink_image(){
             }
         }
 
-        // first condition
+        // Iterate through by half size to shrink by half
         if (n9 == 1 ){
             for(int i = 0 ; i < SIZE /2; i++){
                 for(int j = 0 ; j < SIZE /2 ; j++){
@@ -417,7 +420,8 @@ void shrink_image(){
             }
             return ;
         }
-        // second condition
+
+        // Iterate through by a third of size to shrink by half
         else if (n9 == 2 ){
             for(int i = 0 ; i < SIZE /3; i++){
                 for(int j = 0 ; j < SIZE /3 ; j++){
@@ -426,7 +430,9 @@ void shrink_image(){
             }
             return ;
         }
-        // third condition
+
+    
+        // Iterate through by quarter of size to shrink by half    
         else if (n9 == 3 ){
             for(int i = 0 ; i < SIZE /4; i++){
                 for(int j = 0 ; j < SIZE /4 ; j++){
@@ -437,7 +443,7 @@ void shrink_image(){
         }
         else{
             cout << "\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
-            n9 = -1 ; // loop keep working
+            n9 = -1 ; // loop keep working if selection is wrong 
         }
     }
     
@@ -450,7 +456,7 @@ void mirror(){
     cout<<"1:Left 1/2\n2:Right 1/2\n3:Upper 1/2\n4:Lower 1/2.\n";
     cout<<"Enter a number to select the type of mirroring: ";
     int n10; 
-    cin>>n10;
+    cin >> n10;
     if (n10==1){
         //write the first col. to last col
         for (int i = 0; i < SIZE; i++) {
@@ -489,7 +495,7 @@ void mirror(){
 
     else{
         cout<<"\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
-        mirror();
+        mirror(); // function keep working if selection is wrong 
     }
 
 }
@@ -521,27 +527,40 @@ void detect_edge() {
 
 void shuffle(){
     cout<<"Enter the order in numbers:\n";
-    int o[4], freq[5]={0};
-    for(int i=0; i<4; i++){
-        cin>>o[i];
-        if(o[i]>4 or o[i]<1)o[i]=-1;
-        else if(freq[o[i]])o[i]=0;
-        else freq[o[i]]++;
+    int o[4] , freq[5]={0};
+
+    for(int i = 0; i < 4 ; i++){
+        cin >> o[i];
+        if(o[i] > 4 || o[i] < 1)
+            o[i] = -1 ;
+        else if( freq[o[i]] ) 
+            o[i] = 0 ;
+        else 
+            freq[o[i]]++;
     }
-    string q[]={"first", "second", "third", "fourth"};
-    for(int i=0; i<4; i++){
-        while(o[i]==-1 or !o[i]){
+
+    string q[] = {"first", "second", "third", "fourth"};
+
+    for(int i = 0; i < 4; i++){
+        while(o[i] == -1 || !o[i] ){
             int x;
-            if(o[i])cout<<q[i]<<" number is wrong!\nEnter a number between 1 and 4: ";
-            else cout<<q[i]<<" number is repeated!\nEnter a number between 1 and 4: ";
-            cin>>x;
-            o[i]=x;
-            if(o[i]>4 or o[i]<1)o[i]=-1;
-            else if(freq[o[i]])o[i]=0;
-            else freq[o[i]]++;
+            if(o[i])
+                cout << q[i] << " number is wrong!\nEnter a number between 1 and 4: ";
+            else 
+                cout << q[i] << " number is repeated!\nEnter a number between 1 and 4: ";
+            cin >> x;
+            o[i] = x ;
+            if(o[i] > 4 || o[i] < 1)
+                o[i]=-1;
+            else if(freq[o[i]])
+                o[i] = 0 ;
+            else 
+                freq[o[i]]++;
         }
     }
-    for(int k=0; k<4; ++k){
+
+    for(int k = 0; k < 4; ++k){
+
         if(o[k] == 1){
             int x = 128 , y ;
             if(k == 0 or k == 1)
@@ -557,7 +576,8 @@ void shuffle(){
                 x++;
             }
         }
-        else if(o[k]==2){
+
+        else if(o[k] == 2){
             int x = 128 , y ;
             if(k == 0 or k==1)
                 x=0;
@@ -664,47 +684,49 @@ void skew_h(){
 
 void shrink_v(float d){
 
-    float step = SIZE/d;
-    float y=0;
+    float step = SIZE/d ;
+    float y = 0 ;
 
     for(int i=0; i<d; i++){
-        y+=step;
+        y += step ;
         for(int j=0; j<SIZE; j++){
-            image2[i][j]=image[int(y)][j];
+            image2[i][j] = image[int(y)][j] ;
         }
     }
 
 }
 
 void skew_v(){
+
     int b;
-    if(!cnt)cout<<"Enter your angle: ";
-    cin>>b;
-    if(b<0 or b>90){
+    if(!cnt)
+        cout<<"Enter your angle: ";
+    cin >> b;
+    if(b < 0 || b > 90){
         cout<<"Wrong number!\nEnter an angle between 0 and 90: ";
         cnt++;
         skew_v();
     }
     else {
-    cnt=0;
-    double a = tan((M_PI/180)*(90-b));
-    float x = floor(256/ (1 + 1/a));
-    shrink_v(x);
+        cnt=0;
+        double a = tan((M_PI/180)*(90-b));
+        float x = floor(256/ (1 + 1/a));
+        shrink_v(x);
 
-    for(int i=0; i<SIZE; i++){
-        for(int j=0; j<SIZE; j++)image[i][j]=255;
+        for(int i=0; i<SIZE; i++){
+            for(int j=0; j<SIZE; j++)image[i][j]=255;
     }
 
-    double step = SIZE - x; double move = step/SIZE;
+        double step = SIZE - x; double move = step/SIZE;
 
-    for(int i=0; i<SIZE; i++){
-        int ct = step + x, y=0;
-        for(int j=step; j<ct; ++j){
-            image[j][i]=image2[y][i];
-            y++;
+        for(int i=0; i<SIZE; i++){
+            int ct = step + x, y=0;
+            for(int j=step; j<ct; ++j){
+                image[j][i]=image2[y][i];
+                y++;
+            }
+            step -= move;
         }
-        step-=move;
-    }
     }
 
 }
@@ -870,6 +892,8 @@ void doSomethingForImage() {
 
             case 's':
                 saveImage ();
+                loaded = false ; /* this if you save photo ,
+                                you able to loead new photo again if you select filter */
                 break;
 
             default : // close the program if you choice zero
