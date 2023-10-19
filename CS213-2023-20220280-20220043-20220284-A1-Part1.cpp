@@ -76,7 +76,7 @@ char menu(){
 void loadImage () {
     char imageFileName[100];
 
-    // Get gray scale image file name
+    // Get grayscale image file name
     cout << "Enter the source image file name: ";
     cin >> imageFileName;
 
@@ -548,7 +548,7 @@ void shuffle(){
     string q[] = {"first", "second", "third", "fourth"};
 
     for(int i = 0; i < 4; i++){
-      //correcting the the invalid numbers
+      //correcting the invalid numbers
         while(o[i] == -1 || !o[i] ){
             int x;
             if(o[i])
@@ -784,7 +784,7 @@ void doSomethingForImage() {
     char num;
     bool loaded = false ;
     while (true) {
-        num = menu() ; // return what we choice from menu
+        num = menu() ; // return what we chose from menu
         select = num ;
         switch (select) {
             case '1':
