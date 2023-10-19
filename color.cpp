@@ -389,14 +389,7 @@ void blur_image(){
 void shrink_image(){
     int shrink[SIZE][SIZE][RGB] ; // Create a shrink array to store blurred image data
 
-    int n9 = -1 ; 
-    while (n9 == -1){
-        cout << "shrink the image dimensions to: \n";
-        cout << "1: 1/2\n2: 1/3\n3: 1/4 \n";
-        cout << "Enter a number to select dimension of shrink the image: ";
-        cin >> n9 ;
-      
-        // Iterate through by half size to shrink by half
+  // to make the image background white
         for(int i = 0 ; i < SIZE ; i++){
             for(int j = 0 ; j < SIZE ; j++){
                 for (int k = 0 ; k < RGB ; k++){
@@ -405,6 +398,14 @@ void shrink_image(){
                 }
             }
         }
+
+    int n9 = -1 ; 
+    while (n9 == -1){
+        cout << "shrink the image dimensions to: \n";
+        cout << "1: 1/2\n2: 1/3\n3: 1/4 \n";
+        cout << "Enter a number to select dimension of shrink the image: ";
+        cin >> n9 ;
+      
 
         // first condition
         if (n9 == 1 ){
@@ -416,7 +417,7 @@ void shrink_image(){
             }
             return ;
         }
-        // Iterate through by a third of size to shrink by half
+        // second condition
         else if (n9 == 2 ){
             for(int i = 0 ; i < SIZE /3; i++){
                 for(int j = 0 ; j < SIZE /3 ; j++){
@@ -426,7 +427,7 @@ void shrink_image(){
             }
             return ;
         }
-        // Iterate through by quarter of size to shrink by half
+        // third condition
         else if (n9 == 3 ){
             for(int i = 0 ; i < SIZE /4; i++){
                 for(int j = 0 ; j < SIZE /4 ; j++){
@@ -438,7 +439,7 @@ void shrink_image(){
         }
         else{
             cout << "\n========\n\nWrong Number, Please TRY Again  *_*\n\n";
-            n9 = -1 ; // loop keep working if selection is wrong
+            n9 = -1 ; // loop keep working
         }
     }
     
@@ -568,12 +569,12 @@ void enlarge(){
         cout<<"Pick a quarter to enlarge: ";
         int x=0, a=0, b=0, ni=128, nj=128, q;
         cin>>q;
+        while(4<q or q<1){
+            cout<<"Wrong number!\nEnter a number between 1 and 4: ";
+            cin>>q;
+        }
         if(!(q&1)) b=128,nj=SIZE;
         if(q>2 and q<5) a=128,ni=SIZE;
-        if(4<q or q<1){
-            cout<<"Wrong number!\nEnter a number between 1 and 4: ";
-            enlarge();
-        }
         for (int i=a; i < ni; i++) {
             int y=0;
             for (int j=b; j<nj; j++){
@@ -582,8 +583,8 @@ void enlarge(){
                 image2[x+1][y][k]=image[i][j][k];
                 image2[x][y+1][k]=image[i][j][k];
                 image2[x+1][y+1][k]=image[i][j][k];
-                y+=2;
               }
+              y+=2;
             }
             x+=2;
         }
